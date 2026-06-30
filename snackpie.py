@@ -81,8 +81,6 @@ class ASk:
         if not value:
             raise ValueError("There is no value")
         self._value = input(value)
-    
-
 
 class VAR:
     all = {}
@@ -95,7 +93,7 @@ class VAR:
             pass
         else:
             if 'ask' in v:
-                inp = list(map(str.strip, v.split('ask')))
+                inp = list(map(str.lstrip, v.split('ask')))
                 v = ASk(inp[-1]).value
             if VAR().is_v(n):
                 if n.startswith('_'):
@@ -111,6 +109,7 @@ class VAR:
                 v = float(v)
             else:
                 v =str(v)
+            cls.all[n] = None
             cls.all[n] = {
                 "value":v,
                 "type": t
@@ -139,65 +138,71 @@ class VAR:
     def is_v(cls, n:str) -> bool:
         if not n:
             raise ValueError
-        if not cls.all.keys():
-            return False
         return n in cls.all.keys()
     
     
-
-try:
-    while True:
-        
-        command = input("")
-
-        say_re = re.search(r"^say (?:\"(.+)\"|\'(.+)\')$", command)
-        ask_re = re.search(r"^ask (?:\"(.+)\"|\'(.+)\')$", command)
-        var_re = re.search(r"^(.+) ?= ?(?:\"([a-zA-Z0-9]+)\"|\'([a-zA-Z0-9]+)\')$", command)
-        gu_re = re.search(r"^([0-9]\.?[0-9]*) ?(\+|\-|\*|\/) ?([0-9]\.?[0-9]*)$", command.strip())
-
-        if not command:
-            raise ValueError('Invalid syntax')
-        
-        if say_re:
-            rel_v = say_re.group(1) if "\"" in command else say_re.group(2)
-            print(SAY(rel_v))
-        elif var_re:
-            rel_v = var_re.group(2) if "\"" in command else var_re.group(3)
-            ins_vars = VAR(var_re.group(1), rel_v)
-        elif ask_re:
-            rel_v = ask_re.group(1) if "\"" in command else ask_re.group(2)
-            print(ASk(rel_v))
-        elif gu_re:
-            f_n = [gu_re.group(1), VAR().ver_type(gu_re.group(1))]
-            s_n = [gu_re.group(3), VAR().ver_type(gu_re.group(3))]
-            op = gu_re.group(2)
-            if f_n[1] != s_n[1]:
-                raise ValueError('Not same data types')
-            if f_n[1] == 'string':
-                raise ValueError('Can\'t do that')
-            if f_n[-1] == 'intger':
-                f_n= int(f_n[0])
-            else:
-                f_n= float(f_n[0])
-            if s_n[-1] == 'intger':
-                s_n= int(s_n[0])
-            else:
-                s_n= float(s_n[0])
+def main():
+    try:
+        while True:
             
-            if op == '+':
-                res = f_n+s_n
-            elif op == '-':
-                res = f_n-s_n
-            elif op == '*':
-                res = f_n*s_n
+            command = input("")
+
+            say_re = re.search(r"^say (?:\"(.+)\"|\'(.+)\'|(.+))$", command)
+            ask_re = re.search(r"^ask (?:\"(.+)\"|\'(.+)\')$", command)
+            var_re = re.search(r"^(.+) ?= ?(ask )?(?:\"(.+)\"|\'(.+)\')$", command)
+            gu_re = re.search(r"^([0-9]\.?[0-9]*) ?(\+|\-|\*|\/) ?([0-9]\.?[0-9]*)$", command.strip())
+
+            if not command:
+                raise ValueError('Invalid syntax')
+            
+            if say_re:
+                if "\"" in command:
+                    rel_v = say_re.group(1)
+                elif "'" in command:
+                    rel_v = say_re.group(2)
+                else:
+                    rel_v = say_re.group(3)
+                print(SAY(rel_v))
+            elif var_re:
+                rel_v = var_re.group(3) if var_re.group(3) else var_re.group(4)
+                ins_vars = VAR(var_re.group(1).strip(), var_re.group(2)+rel_v if var_re.group(2) else rel_v)
+            elif ask_re:
+                rel_v = ask_re.group(1) if "\"" in command else ask_re.group(2)
+                print(ASk(rel_v))
+            elif gu_re:
+                f_n = [gu_re.group(1), VAR().ver_type(gu_re.group(1))]
+                s_n = [gu_re.group(3), VAR().ver_type(gu_re.group(3))]
+                op = gu_re.group(2)
+                if f_n[1] != s_n[1]:
+                    raise ValueError('Not same data types')
+                if f_n[1] == 'string':
+                    raise ValueError('Can\'t do that')
+                if f_n[-1] == 'intger':
+                    f_n= int(f_n[0])
+                else:
+                    f_n= float(f_n[0])
+                if s_n[-1] == 'intger':
+                    s_n= int(s_n[0])
+                else:
+                    s_n= float(s_n[0])
+                
+                if op == '+':
+                    res = f_n+s_n
+                elif op == '-':
+                    res = f_n-s_n
+                elif op == '*':
+                    res = f_n*s_n
+                else:
+                    res = f_n/s_n
+                print(SAY(res))
+            elif command == 'exit()':
+                raise EOFError
             else:
-                res = f_n/s_n
-            print(SAY(res))
-        elif command == 'exit()':
-            raise EOFError
-        else:
-            raise TypeError("ERROR: I think that you're missing \" or ' :>")
-except EOFError:
-    sys.exit('OUT')
-except Exception as e:
-    sys.exit(str(e))
+                raise TypeError("ERROR: I think that you're missing \" or ' :>")
+    except EOFError:
+        sys.exit('OUT')
+    except Exception as e:
+        sys.exit(str(e))
+
+if __name__ == '__main__':
+    main()
