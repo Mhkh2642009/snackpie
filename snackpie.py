@@ -44,6 +44,7 @@
 
 #============================================
 import sys, re
+import interpreter as ipr
 
 class SAY:
     def __init__(self, value):
@@ -52,8 +53,8 @@ class SAY:
     def __str__(self):
         t = VAR().ver_type(str(self.value))
         if VAR().is_v(self.value):
-            return f'>>>>"{VAR().get_v(self.value)['value']}"'
-        return f'>>>>"{self.value}"' if t not in ['intger', 'float'] else f'>>>>{self.value}'
+            return f'>>>>{VAR().get_v(self.value)['value']}'
+        return f'>>>>{self.value}' if t not in ['intger', 'float'] else f'>>>>{self.value}'
 
     @property
     def value(self):
@@ -102,9 +103,16 @@ class VAR:
                     return
                 else:
                     print(f'The old value is {VAR().get_v(n)['value']}')
+            gu_re = re.findall(r"\d+(?:\.\d+)?|[+\-*/]", v)
+            if "'" not in v or '"' not in v:
+                if gu_re:
+                    v = str(calc(gu_re))
+                else:
+                    raise TypeError("ERROR: I think that you're missing \" or ' :>")
+            
             t = cls.ver_type(v)
             if t == 'intger':
-                v= int(v)
+                v= int(float(v))
             elif t == 'float':
                 v = float(v)
             else:
@@ -118,6 +126,7 @@ class VAR:
     
     @staticmethod
     def ver_type(var):
+        var = var.removesuffix('.0')
         if var.isdigit():
             return 'intger'
         
@@ -139,70 +148,123 @@ class VAR:
         if not n:
             raise ValueError
         return n in cls.all.keys()
+
+def calc(exp):
+    gu_re = exp  #1*2*3*4*5*6/456*90
+    sums = 0
+    new_gu = gu_re.copy()
+    while '*' in new_gu or '/' in new_gu:
+        try:
+            cr=new_gu.index('*') if '*' in new_gu else None
+            dv=new_gu.index('/') if '/' in new_gu else None
+            if cr or dv:
+                if (cr and not dv) or (cr and dv and cr<dv):
+                    lst = float(new_gu[cr-1])
+                    nxt = float(new_gu[cr+1])
+                    m = lst * nxt
+                    new_gu[cr] = m
+                    new_gu.pop(cr+1)
+                    new_gu.pop(cr-1)
+                elif (dv and not cr) or (cr and dv and cr>dv):
+                    lst = float(new_gu[dv-1])
+                    nxt = float(new_gu[dv+1])
+                    m = lst / nxt
+                    new_gu[dv] = m
+                    new_gu.pop(dv+1)
+                    new_gu.pop(dv-1)
+        except IndexError:
+            break
+    while '+' in new_gu or '-' in new_gu:
+        try:
+            pl=new_gu.index('+') if '+' in new_gu else None
+            mi=new_gu.index('-') if '-' in new_gu else None
+            if pl or mi:
+                if (pl and not mi) or (pl and mi and pl<mi):
+                    lst = float(new_gu[pl-1])
+                    nxt = float(new_gu[pl+1])
+                    m = lst + nxt
+                    new_gu[pl] = m
+                    new_gu.pop(pl+1)
+                    new_gu.pop(pl-1)
+                elif (mi and not pl) or (pl and mi and pl>mi):
+                    lst = float(new_gu[mi-1])
+                    nxt = float(new_gu[mi+1])
+                    m = lst - nxt
+                    new_gu[mi] = m
+                    new_gu.pop(mi+1)
+                    new_gu.pop(mi-1)
+        except IndexError:
+            break
+    else:
+        return new_gu[0]
+
+
     
-    
-def main():
+def prog(com):
     try:
-        while True:
-            
-            command = input("")
+        command = com
 
-            say_re = re.search(r"^say (?:\"(.+)\"|\'(.+)\'|(.+))$", command)
-            ask_re = re.search(r"^ask (?:\"(.+)\"|\'(.+)\')$", command)
-            var_re = re.search(r"^(.+) ?= ?(ask )?(?:\"(.+)\"|\'(.+)\')$", command)
-            gu_re = re.search(r"^([0-9]\.?[0-9]*) ?(\+|\-|\*|\/) ?([0-9]\.?[0-9]*)$", command.strip())
+        say_re = re.search(r"^say (?:(\".+\")|(\'.+\')|(.+))$", command)
+        ask_re = re.search(r"^ask (?:(\".+\")|(\'.+\')|(.+))$", command)
+        var_re = re.search(r"^(.+) ?= ?(ask )?(?:(\".+\")|(\'.+\')|(.+))$", command)
+        gu_re = re.findall(r"\d+(?:\.\d+)?|[+\-*/]", command)
 
-            if not command:
-                raise ValueError('Invalid syntax')
-            
-            if say_re:
-                if "\"" in command:
-                    rel_v = say_re.group(1)
-                elif "'" in command:
-                    rel_v = say_re.group(2)
-                else:
-                    rel_v = say_re.group(3)
-                print(SAY(rel_v))
-            elif var_re:
-                rel_v = var_re.group(3) if var_re.group(3) else var_re.group(4)
-                ins_vars = VAR(var_re.group(1).strip(), var_re.group(2)+rel_v if var_re.group(2) else rel_v)
-            elif ask_re:
-                rel_v = ask_re.group(1) if "\"" in command else ask_re.group(2)
-                print(ASk(rel_v))
+        if not command:
+            raise ValueError('Invalid syntax')
+        
+        if say_re:
+            gu_re = re.findall(r"\d+(?:\.\d+)?|[+\-*/]", say_re.group(3))
+            if "\"" in command:
+                rel_v = say_re.group(1)
+            elif "'" in command:
+                rel_v = say_re.group(2)
             elif gu_re:
-                f_n = [gu_re.group(1), VAR().ver_type(gu_re.group(1))]
-                s_n = [gu_re.group(3), VAR().ver_type(gu_re.group(3))]
-                op = gu_re.group(2)
-                if f_n[1] != s_n[1]:
-                    raise ValueError('Not same data types')
-                if f_n[1] == 'string':
-                    raise ValueError('Can\'t do that')
-                if f_n[-1] == 'intger':
-                    f_n= int(f_n[0])
-                else:
-                    f_n= float(f_n[0])
-                if s_n[-1] == 'intger':
-                    s_n= int(s_n[0])
-                else:
-                    s_n= float(s_n[0])
-                
-                if op == '+':
-                    res = f_n+s_n
-                elif op == '-':
-                    res = f_n-s_n
-                elif op == '*':
-                    res = f_n*s_n
-                else:
-                    res = f_n/s_n
-                print(SAY(res))
-            elif command == 'exit()':
-                raise EOFError
+                rel_v = calc(gu_re)
             else:
-                raise TypeError("ERROR: I think that you're missing \" or ' :>")
+                ty = VAR().ver_type(say_re.group(3))
+                if ty == 'string' and not VAR().is_v(say_re.group(3)):
+                    raise TypeError("ERROR: I think that you're missing \" or ' :>")
+                rel_v = say_re.group(3)
+            print(SAY(rel_v))
+        elif var_re:
+            if var_re.group(3):
+                rel_v = var_re.group(3)
+            elif var_re.group(4):
+                rel_v = var_re.group(4)
+            else:
+                rel_v = var_re.group(5)
+            ins_vars = VAR(var_re.group(1).strip(), var_re.group(2)+rel_v if var_re.group(2) else rel_v)
+        elif ask_re:
+            if "\"" in command:
+                rel_v = ask_re.group(1)
+            elif "'" in command:
+                rel_v = ask_re.group(2)
+            else:
+                ty = VAR().ver_type(ask_re.group(3))
+                if ty == 'string' and not VAR().is_v(ask_re.group(3)):
+                    raise TypeError("ERROR: I think that you're missing \" or ' :>")
+                rel_v = ask_re.group(3)
+            print(ASk(rel_v))
+        elif gu_re:
+            print(SAY(calc(gu_re)))
+        elif command == 'exit()':
+            raise EOFError
+        else:
+            raise TypeError("ERROR: I think that you're missing \" or ' :>")
     except EOFError:
         sys.exit('OUT')
     except Exception as e:
         sys.exit(str(e))
+
+def main():
+    if len(sys.argv) == 2:
+        ipr.read_file(sys.argv[1])
+    else:
+        while True:
+            try:
+                prog(input(""))
+            except EOFError:
+                sys.exit('OUT')
 
 if __name__ == '__main__':
     main()
