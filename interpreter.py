@@ -1,5 +1,5 @@
 import sys, re
-from snackpie import SAY, ASk, VAR, prog, IFstatement
+from snackpie import prog, IFstatement
 
 
 def read_file(file):
