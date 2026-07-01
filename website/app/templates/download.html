@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Download{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container" style="max-width: 700px; text-align: center;">
+    <h1 style="font-family: var(--font-display); font-size: var(--text-3xl); margin-bottom: var(--space-4);">
+      📦 Get SnackPie
+    </h1>
+    <p style="font-size: var(--text-lg); color: var(--color-text-secondary); margin-bottom: var(--space-12);">
+      Install SnackPie on your computer and start baking!
+    </p>
+    
+    <!-- Quick Start (Online) -->
+    <div class="card" style="margin-bottom: var(--space-8); text-align: left;">
+      <h2 style="font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-4);">
+        🌐 Quick Start (No Installation)
+      </h2>
+      <p style="margin-bottom: var(--space-4);">Try SnackPie right now in your browser!</p>
+      <a href="{{ url_for('playground.index') }}" class="btn btn-primary">🍳 Open Playground</a>
+    </div>
+    
+    <!-- Install from GitHub -->
+    <div class="card" style="margin-bottom: var(--space-8); text-align: left;">
+      <h2 style="font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-4);">
+        💻 Install from GitHub
+      </h2>
+      <p style="margin-bottom: var(--space-4);">Clone the repository and run locally:</p>
+      
+      <div class="code-block" style="margin-bottom: var(--space-4);">
+        <div class="code-block-header">
+          <span>Terminal</span>
+        </div>
+        <div class="code-block-body">
+          <pre><code># Clone the repository
+git clone https://github.com/snackpie/snackpie.git
+cd snackpie
+
+# Run interactive mode
+python3 snackpie.py
+
+# Or run a .pie file
+python3 interpreter.py</code></pre>
+        </div>
+      </div>
+      
+      <p style="font-size: var(--text-sm); color: var(--color-text-muted);">
+        Requires Python 3.10 or higher.
+      </p>
+    </div>
+    
+    <!-- System Requirements -->
+    <div class="card" style="text-align: left;">
+      <h2 style="font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-4);">
+        📋 System Requirements
+      </h2>
+      <ul style="margin-left: var(--space-6);">
+        <li>Python 3.10 or higher</li>
+        <li>Any operating system (Windows, macOS, Linux)</li>
+        <li>Terminal / Command line</li>
+      </ul>
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Documentation{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container" style="max-width: 800px; text-align: center;">
+    <h1 style="font-family: var(--font-display); font-size: var(--text-3xl); margin-bottom: var(--space-4);">
+      📖 SnackPie Documentation
+    </h1>
+    <p style="font-size: var(--text-lg); color: var(--color-text-secondary); margin-bottom: var(--space-12);">
+      Everything you need to become a master SnackPie chef!
+    </p>
+    
+    <div style="display: grid; grid-template-columns: 1fr; gap: var(--space-6); max-width: 600px; margin: 0 auto;">
+      <a href="{{ url_for('docs.tutorial') }}" class="card" style="text-decoration: none; text-align: left;">
+        <div style="display: flex; align-items: center; gap: var(--space-4);">
+          <div style="font-size: 2rem;">👩‍🍳</div>
+          <div>
+            <h3 style="font-family: var(--font-display); margin-bottom: var(--space-1);">Tutorial</h3>
+            <p style="color: var(--color-text-secondary); margin: 0; font-size: var(--text-sm);">
+              Step-by-step lessons from hello world to games!
+            </p>
+          </div>
+        </div>
+      </a>
+      
+      <a href="{{ url_for('docs.reference') }}" class="card" style="text-decoration: none; text-align: left;">
+        <div style="display: flex; align-items: center; gap: var(--space-4);">
+          <div style="font-size: 2rem;">📋</div>
+          <div>
+            <h3 style="font-family: var(--font-display); margin-bottom: var(--space-1);">Reference</h3>
+            <p style="color: var(--color-text-secondary); margin: 0; font-size: var(--text-sm);">
+              Complete language reference and syntax guide.
+            </p>
+          </div>
+        </div>
+      </a>
+      
+      <a href="{{ url_for('docs.cookbook') }}" class="card" style="text-decoration: none; text-align: left;">
+        <div style="display: flex; align-items: center; gap: var(--space-4);">
+          <div style="font-size: 2rem;">🍕</div>
+          <div>
+            <h3 style="font-family: var(--font-display); margin-bottom: var(--space-1);">Cookbook</h3>
+            <p style="color: var(--color-text-secondary); margin: 0; font-size: var(--text-sm);">
+              Common patterns and ready-to-use recipes.
+            </p>
+          </div>
+        </div>
+      </a>
+      
+      <a href="{{ url_for('playground.index') }}" class="card" style="text-decoration: none; text-align: left;">
+        <div style="display: flex; align-items: center; gap: var(--space-4);">
+          <div style="font-size: 2rem;">👨‍🍳</div>
+          <div>
+            <h3 style="font-family: var(--font-display); margin-bottom: var(--space-1);">Playground</h3>
+            <p style="color: var(--color-text-secondary); margin: 0; font-size: var(--text-sm);">
+              Try code live in your browser!
+            </p>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}

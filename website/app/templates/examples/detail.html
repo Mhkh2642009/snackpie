@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}{{ example.title }}{% endblock %}
+
+{% block content %}
+<section class="section">
+  <div class="container" style="max-width: 800px;">
+    <div style="margin-bottom: var(--space-4);">
+      <a href="{{ url_for('examples.index') }}" style="color: var(--color-text-muted); text-decoration: none; font-size: var(--text-sm);">
+        ← Back to Examples
+      </a>
+    </div>
+    
+    <h1 style="font-family: var(--font-display); font-size: var(--text-3xl); margin-bottom: var(--space-2);">
+      {{ example.title }}
+    </h1>
+    
+    <p style="color: var(--color-text-secondary); margin-bottom: var(--space-4);">
+      {{ example.description }}
+    </p>
+    
+    <div style="display: flex; gap: var(--space-2); margin-bottom: var(--space-8); flex-wrap: wrap;">
+      <span class="tag {% if example.difficulty == 'beginner' %}tag-success{% elif example.difficulty == 'intermediate' %}tag-secondary{% else %}tag-error{% endif %}">
+        {{ example.difficulty }}
+      </span>
+      {% for tag in example.tags %}
+      <span style="padding: var(--space-1) var(--space-2); background: var(--color-cream-darker); border-radius: var(--radius-sm); font-size: var(--text-xs); color: var(--color-text-muted);">
+        {{ tag }}
+      </span>
+      {% endfor %}
+    </div>
+    
+    <!-- Code -->
+    <div class="code-block" style="margin-bottom: var(--space-8);">
+      <div class="code-block-header">
+        <span>recipe.pie</span>
+        <button class="btn btn-ghost btn-sm" onclick="copyCode()" style="padding: 2px 8px; font-size: var(--text-xs);">
+          📋 Copy
+        </button>
+      </div>
+      <div class="code-block-body">
+        <pre><code id="exampleCode">{{ example.code }}</code></pre>
+      </div>
+    </div>
+    
+    <!-- Expected Output -->
+    <div style="margin-bottom: var(--space-8);">
+      <h3 style="font-family: var(--font-display); font-size: var(--text-lg); margin-bottom: var(--space-3);">
+        Expected Output
+      </h3>
+      <div class="card-code">
+        <code>{{ example.previewOutput }}</code>
+      </div>
+    </div>
+    
+    <!-- Try It -->
+    <div style="text-align: center; padding: var(--space-8); background: var(--color-cream-darker); border-radius: var(--radius-xl);">
+      <h3 style="font-family: var(--font-display); margin-bottom: var(--space-4);">Try this recipe! 🍳</h3>
+      <p style="margin-bottom: var(--space-4); color: var(--color-text-secondary);">Open the playground with this code pre-loaded.</p>
+      <a href="{{ url_for('playground.index') }}?example={{ example.slug }}" class="btn btn-primary btn-lg">
+        ▶ Run in Playground
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  function copyCode() {
+    const code = document.getElementById('exampleCode').textContent;
+    navigator.clipboard.writeText(code).then(() => {
+      alert('Code copied! 📋');
+    });
+  }
+</script>
+{% endblock %}
