@@ -336,6 +336,29 @@ def prog(com):
             print(ASk(rel_v))
         elif gu_re:
             print(SAY(calc(gu_re)))
+        elif command.startswith('if '):
+            obj = IFstatement()
+            bodies = {}
+            cond = command[3:-1]
+            bodies[cond] = None
+            commands = []
+            com = ''
+            while com != 'end':
+                com = input('....')
+                if 'orif' in com:
+                    commands = []
+                    cond = com[5:-1]
+                    bodies[cond] = None
+                elif 'else' in com:
+                    commands = []
+                    cond = 'else'
+                    bodies[cond] = None
+                elif com[0] == ' ':
+                    commands.append(com[1:])
+                    bodies[cond] = commands
+            for condition in bodies:
+                obj.add_branch(condition, bodies[condition])
+            obj.evaluate()
         elif command == 'exit()':
             raise EOFError
         else:
