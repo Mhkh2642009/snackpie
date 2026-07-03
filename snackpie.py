@@ -189,7 +189,7 @@ class IFstatement:
 
     def evaluate(self):
         else_body = None
-
+        
         for condition, body in self.branches:
 
             if condition == "else":
@@ -214,7 +214,7 @@ class IFstatement:
             right = self.parse_value(right)
 
             state = False
-
+            print(left, op, right)
             if op == ">":
                 state = left > right
 
@@ -241,8 +241,9 @@ class IFstatement:
             self.execute(else_body)
 
     def execute(self, body):
+        print(body)
         for command in body:
-            prog(command)
+            prog(command, True)
 
 def calc(exp):
     gu_re = exp  #1*2*3*4*5*6/456*90
@@ -293,7 +294,7 @@ def calc(exp):
     else:
         return new_gu[0]
 
-def prog(com):
+def prog(com, ig=False):
     try:
         command = com
 
@@ -305,7 +306,30 @@ def prog(com):
         if not command:
             raise ValueError('Invalid syntax')
         
-        if say_re:
+        if command.startswith('if ') and ig == False:
+            obj = IFstatement()
+            bodies = {}
+            cond = command[3:-1]
+            bodies[cond] = None
+            commands = []
+            com = ''
+            while com != 'end':
+                com = input('....')
+                if 'orif' in com:
+                    commands = []
+                    cond = com[5:-1]
+                    bodies[cond] = None
+                elif 'else' in com:
+                    commands = []
+                    cond = 'else'
+                    bodies[cond] = None
+                elif com[0] == ' ':
+                    commands.append(com[1:])
+                    bodies[cond] = commands
+            for condition in bodies:
+                obj.add_branch(condition, bodies[condition])
+            obj.evaluate()
+        elif say_re:
             if "\"" in command:
                 rel_v = say_re.group(1)[1:-1]
             elif "'" in command:
@@ -334,31 +358,9 @@ def prog(com):
                     raise TypeError("ERROR: I think that you're missing \" or ' :>")
                 rel_v = ask_re.group(3)
             print(ASk(rel_v))
+            print("ENTER IF:", command)
         elif gu_re:
             print(SAY(calc(gu_re)))
-        elif command.startswith('if '):
-            obj = IFstatement()
-            bodies = {}
-            cond = command[3:-1]
-            bodies[cond] = None
-            commands = []
-            com = ''
-            while com != 'end':
-                com = input('....')
-                if 'orif' in com:
-                    commands = []
-                    cond = com[5:-1]
-                    bodies[cond] = None
-                elif 'else' in com:
-                    commands = []
-                    cond = 'else'
-                    bodies[cond] = None
-                elif com[0] == ' ':
-                    commands.append(com[1:])
-                    bodies[cond] = commands
-            for condition in bodies:
-                obj.add_branch(condition, bodies[condition])
-            obj.evaluate()
         elif command == 'exit()':
             raise EOFError
         else:
