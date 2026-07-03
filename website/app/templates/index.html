@@ -6,24 +6,36 @@
 <style>
   /* Hero Section */
   .hero {
-    padding: var(--space-16) var(--space-4) var(--space-20);
-    background: linear-gradient(180deg, var(--color-primary-light) 0%, var(--color-bg) 100%);
+    padding: var(--space-20) var(--space-5) var(--space-24);
+    background: var(--gradient-hero);
     position: relative;
     overflow: hidden;
   }
-  
+
   .hero::before {
     content: '';
     position: absolute;
-    top: -50%;
-    right: -20%;
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, var(--color-honey-light) 0%, transparent 70%);
-    opacity: 0.3;
+    top: -30%;
+    right: -15%;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(244, 211, 94, 0.18) 0%, transparent 70%);
     pointer-events: none;
+    animation: float 8s ease-in-out infinite;
   }
-  
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -20%;
+    left: -10%;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(197, 108, 57, 0.1) 0%, transparent 70%);
+    pointer-events: none;
+    animation: float 10s ease-in-out infinite reverse;
+  }
+
   .hero-inner {
     max-width: var(--container-max);
     margin: 0 auto;
@@ -31,38 +43,42 @@
     grid-template-columns: 1fr;
     gap: var(--space-12);
     align-items: center;
+    position: relative;
+    z-index: 1;
   }
-  
+
   @media (min-width: 768px) {
+    .hero { padding: var(--space-24) var(--space-8); }
     .hero-inner {
       grid-template-columns: 1fr 1fr;
-      gap: var(--space-8);
+      gap: var(--space-10);
     }
   }
-  
+
   .hero-content {
     text-align: center;
   }
-  
+
   @media (min-width: 768px) {
     .hero-content { text-align: left; }
   }
-  
+
   .hero-badge {
     display: inline-flex;
     align-items: center;
     gap: var(--space-2);
-    padding: var(--space-1) var(--space-3);
+    padding: var(--space-1) var(--space-4);
     background: var(--color-bg-elevated);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-full);
     font-size: var(--text-sm);
-    font-weight: var(--weight-medium);
+    font-weight: var(--weight-semibold);
     color: var(--color-text-secondary);
     margin-bottom: var(--space-6);
-    animation: fadeInUp 0.5s ease-out;
+    box-shadow: var(--shadow-sm);
+    animation: fadeInUp 0.6s var(--ease-out-expo);
   }
-  
+
   .hero-badge-dot {
     width: 8px;
     height: 8px;
@@ -70,7 +86,7 @@
     border-radius: 50%;
     animation: pulse 2s infinite;
   }
-  
+
   .hero-title {
     font-family: var(--font-display);
     font-size: var(--text-4xl);
@@ -78,101 +94,114 @@
     line-height: var(--leading-tight);
     color: var(--color-text-primary);
     margin-bottom: var(--space-6);
-    animation: fadeInUp 0.5s ease-out 0.1s forwards;
+    animation: fadeInUp 0.6s var(--ease-out-expo) 0.1s forwards;
     opacity: 0;
   }
-  
+
   .hero-title-highlight {
     color: var(--color-secondary);
     position: relative;
+    display: inline-block;
   }
-  
+
   .hero-title-highlight::after {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: 2px;
     left: 0;
     right: 0;
-    height: 4px;
+    height: 6px;
     background: var(--color-primary);
-    border-radius: 2px;
+    border-radius: 3px;
+    opacity: 0.5;
     transform: scaleX(0);
     transform-origin: left;
-    animation: slideIn 0.6s ease-out 0.5s forwards;
+    animation: slideIn 0.6s var(--ease-out-expo) 0.6s forwards;
   }
-  
+
   @keyframes slideIn {
     to { transform: scaleX(1); }
   }
-  
+
   .hero-description {
     font-size: var(--text-lg);
     color: var(--color-text-secondary);
     max-width: 45ch;
-    margin-bottom: var(--space-8);
-    animation: fadeInUp 0.5s ease-out 0.2s forwards;
+    margin: 0 auto var(--space-8);
+    line-height: var(--leading-relaxed);
+    animation: fadeInUp 0.6s var(--ease-out-expo) 0.2s forwards;
     opacity: 0;
   }
-  
+
+  @media (min-width: 768px) {
+    .hero-description { margin: 0 0 var(--space-8); }
+  }
+
   .hero-actions {
     display: flex;
     flex-wrap: wrap;
     gap: var(--space-4);
     justify-content: center;
-    animation: fadeInUp 0.5s ease-out 0.3s forwards;
+    animation: fadeInUp 0.6s var(--ease-out-expo) 0.3s forwards;
     opacity: 0;
   }
-  
+
   @media (min-width: 768px) {
     .hero-actions { justify-content: flex-start; }
   }
-  
+
   /* Hero Mini-Playground */
   .hero-playground {
-    animation: fadeInUp 0.5s ease-out 0.4s forwards;
+    animation: fadeInUp 0.6s var(--ease-out-expo) 0.4s forwards;
     opacity: 0;
   }
-  
+
   .hero-playground-card {
     background: var(--color-bg-elevated);
-    border: 2px solid var(--color-border);
+    border: 1px solid var(--color-border);
     border-radius: var(--radius-xl);
     overflow: hidden;
-    box-shadow: var(--shadow-lg);
+    box-shadow: var(--shadow-xl);
+    transition: transform var(--transition-slow), box-shadow var(--transition-slow);
   }
-  
+
+  .hero-playground-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-xl), var(--shadow-glow);
+  }
+
   .hero-playground-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: var(--space-2) var(--space-3);
+    padding: var(--space-3) var(--space-4);
     background: var(--color-cream-darker);
     border-bottom: 1px solid var(--color-border);
   }
-  
+
   .hero-playground-dots {
     display: flex;
-    gap: var(--space-2);
+    gap: 6px;
   }
-  
+
   .hero-playground-dot {
     width: 12px;
     height: 12px;
     border-radius: 50%;
   }
-  
-  .hero-playground-dot-red { background: var(--color-berry); }
+
+  .hero-playground-dot-red { background: #EF6B6B; }
   .hero-playground-dot-yellow { background: var(--color-primary); }
   .hero-playground-dot-green { background: var(--color-success); }
-  
+
   .hero-playground-editor {
-    padding: var(--space-4);
+    padding: var(--space-5);
     font-family: var(--font-mono);
     font-size: var(--text-sm);
     line-height: var(--leading-code);
-    min-height: 180px;
+    min-height: 160px;
   }
-  
+
   .hero-playground-editor textarea {
     width: 100%;
     height: 120px;
@@ -185,155 +214,200 @@
     resize: none;
     outline: none;
   }
-  
+
   .hero-playground-output {
-    padding: var(--space-3) var(--space-4);
+    padding: var(--space-3) var(--space-5);
     background: var(--color-cocoa);
     color: var(--color-mint);
     font-family: var(--font-mono);
     font-size: var(--text-sm);
-    min-height: 60px;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    min-height: 56px;
+    border-top: 1px solid rgba(255,255,255,0.06);
   }
-  
+
   .hero-playground-output .output-error {
     color: var(--color-berry-light);
   }
-  
+
   .hero-playground-run {
     display: flex;
     justify-content: flex-end;
-    padding: var(--space-2) var(--space-3);
+    padding: var(--space-2) var(--space-4);
     background: var(--color-cream-darker);
     border-top: 1px solid var(--color-border);
   }
-  
+
   /* Features Section */
   .features {
-    padding: var(--space-16) var(--space-4);
+    padding: var(--space-20) var(--space-5);
     background: var(--color-bg);
   }
-  
+
+  @media (min-width: 768px) {
+    .features { padding: var(--space-24) var(--space-8); }
+  }
+
   .features-inner {
     max-width: var(--container-max);
     margin: 0 auto;
   }
-  
+
   .features-header {
     text-align: center;
     margin-bottom: var(--space-12);
   }
-  
+
   .features-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-6);
   }
-  
+
   @media (min-width: 640px) {
     .features-grid { grid-template-columns: repeat(2, 1fr); }
   }
-  
+
   @media (min-width: 1024px) {
     .features-grid { grid-template-columns: repeat(3, 1fr); }
   }
-  
+
   .feature-icon {
     font-size: 2.5rem;
     margin-bottom: var(--space-4);
+    display: inline-block;
   }
-  
+
   .feature-title {
     font-family: var(--font-display);
     font-size: var(--text-xl);
     font-weight: var(--weight-bold);
     margin-bottom: var(--space-3);
   }
-  
+
   .feature-desc {
     color: var(--color-text-secondary);
     font-size: var(--text-base);
+    line-height: var(--leading-relaxed);
   }
-  
+
   /* Quick Start Section */
   .quickstart {
-    padding: var(--space-16) var(--space-4);
+    padding: var(--space-20) var(--space-5);
     background: var(--color-cream-darker);
   }
-  
+
+  @media (min-width: 768px) {
+    .quickstart { padding: var(--space-24) var(--space-8); }
+  }
+
   .quickstart-inner {
     max-width: var(--container-max);
     margin: 0 auto;
   }
-  
+
   .quickstart-steps {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--space-8);
-    counter-reset: step;
   }
-  
+
   @media (min-width: 768px) {
     .quickstart-steps { grid-template-columns: repeat(3, 1fr); }
   }
-  
+
   .quickstart-step {
     position: relative;
     text-align: center;
-    counter-increment: step;
   }
-  
+
   .quickstart-step-number {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 48px;
-    height: 48px;
-    background: var(--color-primary);
+    width: 56px;
+    height: 56px;
+    background: var(--gradient-warm);
     color: var(--color-cocoa);
     font-family: var(--font-display);
     font-size: var(--text-xl);
     font-weight: var(--weight-bold);
     border-radius: 50%;
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-5);
+    box-shadow: 0 4px 16px rgba(244, 211, 94, 0.25);
   }
-  
+
   .quickstart-step-title {
     font-family: var(--font-display);
     font-size: var(--text-xl);
     font-weight: var(--weight-bold);
     margin-bottom: var(--space-3);
   }
-  
+
   .quickstart-step-desc {
     color: var(--color-text-secondary);
+    line-height: var(--leading-relaxed);
   }
-  
+
   /* CTA Section */
   .cta {
-    padding: var(--space-16) var(--space-4);
-    background: var(--color-cocoa);
-    color: var(--color-cream);
+    padding: var(--space-20) var(--space-5);
+    background: var(--gradient-cta);
+    color: #FFF9F0;
     text-align: center;
+    position: relative;
+    overflow: hidden;
   }
-  
+
+  .cta::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(244, 211, 94, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
   .cta-inner {
     max-width: 600px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
   }
-  
+
   .cta-title {
     font-family: var(--font-display);
     font-size: var(--text-3xl);
     font-weight: var(--weight-bold);
     margin-bottom: var(--space-4);
-    color: var(--color-cream);
+    color: #FFF9F0;
   }
-  
+
   .cta-desc {
     font-size: var(--text-lg);
-    color: var(--color-text-muted);
+    color: rgba(255, 249, 240, 0.6);
     margin-bottom: var(--space-8);
+    line-height: var(--leading-relaxed);
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: var(--space-4);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .cta .btn-ghost {
+    color: rgba(255, 249, 240, 0.8);
+    border-color: rgba(255, 249, 240, 0.2);
+  }
+
+  .cta .btn-ghost:hover {
+    background: rgba(255, 249, 240, 0.08);
+    border-color: rgba(255, 249, 240, 0.4);
+    color: #FFF9F0;
   }
 </style>
 {% endblock %}
@@ -347,16 +421,16 @@
         <span class="hero-badge-dot"></span>
         Free & Open Source
       </div>
-      
+
       <h1 class="hero-title">
         Write <span class="hero-title-highlight">Recipes</span>,<br>
         Not Code
       </h1>
-      
+
       <p class="hero-description">
         SnackPie turns programming into a delicious adventure. Perfect for kids moving from Scratch to Python — friendly, fun, and actually delicious! 🥧
       </p>
-      
+
       <div class="hero-actions">
         <a href="{{ url_for('playground.index') }}" class="btn btn-primary btn-xl">
           🍳 Start Baking
@@ -366,7 +440,7 @@
         </a>
       </div>
     </div>
-    
+
     <!-- Mini Playground -->
     <div class="hero-playground">
       <div class="hero-playground-card">
@@ -378,18 +452,18 @@
           </div>
           <span style="font-size: var(--text-sm); color: var(--color-text-muted);">recipe.pie</span>
         </div>
-        
+
         <div class="hero-playground-editor">
           <textarea id="heroCode" spellcheck="false">say "Hello from SnackPie!"
 chef = "You"
 say chef</textarea>
         </div>
-        
+
         <div class="hero-playground-output">
-          <div id="heroOutput">>>>>Hello from SnackPie!
->>>>You</div>
+          <div id="heroOutput">>>>Hello from SnackPie!
+>>>You</div>
         </div>
-        
+
         <div class="hero-playground-run">
           <button class="btn btn-success btn-sm" onclick="runHeroCode()">
             ▶ Bake
@@ -407,38 +481,38 @@ say chef</textarea>
       <h2 class="section-title">The Kitchen Pantry 🍳</h2>
       <p class="section-subtitle">Everything you need to start cooking up your first program!</p>
     </div>
-    
+
     <div class="features-grid">
       <div class="card card-feature">
         <div class="feature-icon">🗣️</div>
         <h3 class="feature-title">Say Words</h3>
         <p class="feature-desc">Make your computer talk! Just say what you want it to print. Easy as pie!</p>
       </div>
-      
+
       <div class="card card-feature">
         <div class="feature-icon">📦</div>
         <h3 class="feature-title">Store Ingredients</h3>
         <p class="feature-desc">Save your favorite values in labeled jars. Variables made simple!</p>
       </div>
-      
+
       <div class="card card-feature">
         <div class="feature-icon">🧮</div>
         <h3 class="feature-title">Kitchen Math</h3>
         <p class="feature-desc">Crunch numbers like a pro. Add, subtract, multiply, divide!</p>
       </div>
-      
+
       <div class="card card-feature">
         <div class="feature-icon">❓</div>
         <h3 class="feature-title">Ask Questions</h3>
         <p class="feature-desc">Get input from users. Make your programs interactive!</p>
       </div>
-      
+
       <div class="card card-feature">
         <div class="feature-icon">🧭</div>
         <h3 class="feature-title">Make Choices</h3>
         <p class="feature-desc">Use if/orif/else to taste-test conditions. Like a real chef!</p>
       </div>
-      
+
       <div class="card card-feature">
         <div class="feature-icon">🔒</div>
         <h3 class="feature-title">Secret Recipes</h3>
@@ -455,20 +529,20 @@ say chef</textarea>
       <h2 class="section-title">Start Baking in 3 Steps 🥧</h2>
       <p class="section-subtitle">From zero to your first program in under a minute!</p>
     </div>
-    
+
     <div class="quickstart-steps">
       <div class="quickstart-step">
         <div class="quickstart-step-number">1</div>
         <h3 class="quickstart-step-title">Open Playground</h3>
         <p class="quickstart-step-desc">Jump right into the online editor. No installation needed!</p>
       </div>
-      
+
       <div class="quickstart-step">
         <div class="quickstart-step-number">2</div>
         <h3 class="quickstart-step-title">Write Code</h3>
         <p class="quickstart-step-desc">Type your first recipe. Try <code>say "Hello!"</code></p>
       </div>
-      
+
       <div class="quickstart-step">
         <div class="quickstart-step-number">3</div>
         <h3 class="quickstart-step-title">Hit Bake!</h3>
@@ -483,11 +557,11 @@ say chef</textarea>
   <div class="cta-inner">
     <h2 class="cta-title">Ready to Cook? 🍕</h2>
     <p class="cta-desc">Join thousands of kid chefs who are learning to code with SnackPie!</p>
-    <div style="display: flex; gap: var(--space-4); justify-content: center; flex-wrap: wrap;">
+    <div class="cta-actions">
       <a href="{{ url_for('playground.index') }}" class="btn btn-primary btn-lg">
         🍳 Try Playground
       </a>
-      <a href="{{ url_for('docs.tutorial') }}" class="btn btn-ghost btn-lg" style="color: var(--color-cream); border-color: var(--color-cream);">
+      <a href="{{ url_for('docs.tutorial') }}" class="btn btn-ghost btn-lg">
         📖 Read Docs
       </a>
     </div>
@@ -500,22 +574,22 @@ say chef</textarea>
   // Mini playground functionality
   const heroCode = document.getElementById('heroCode');
   const heroOutput = document.getElementById('heroOutput');
-  
+
   async function runHeroCode() {
     const code = heroCode.value;
     heroOutput.innerHTML = '<span style="color: var(--color-text-muted);">Baking...</span>';
-    
+
     try {
       const response = await fetch('/api/run', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ code })
       });
-      
+
       const data = await response.json();
-      
+
       if (data.success) {
-        heroOutput.innerHTML = data.output.split('\n').map(line => 
+        heroOutput.innerHTML = data.output.split('\n').map(line =>
           `<div class="playground-output-line">${escapeHtml(line)}</div>`
         ).join('');
       } else {
@@ -525,13 +599,13 @@ say chef</textarea>
       heroOutput.innerHTML = `<div class="output-error">Network error. Try again!</div>`;
     }
   }
-  
+
   function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
   }
-  
+
   // Auto-run on Ctrl+Enter in hero
   heroCode.addEventListener('keydown', (e) => {
     if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {

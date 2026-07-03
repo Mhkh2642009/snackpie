@@ -4,23 +4,19 @@
 
 {% block content %}
 <section class="section">
-  <div class="container" style="max-width: 700px;">
-    <h1 style="font-family: var(--font-display); font-size: var(--text-3xl); margin-bottom: var(--space-2);">
-      👩‍🍳 SnackPie Tutorial
-    </h1>
-    <p style="color: var(--color-text-secondary); margin-bottom: var(--space-8);">
-      Learn to code with SnackPie step by step!
-    </p>
-    
+  <div class="container page-narrow">
+    <h1 class="page-title">👩‍🍳 SnackPie Tutorial</h1>
+    <p class="page-subtitle" style="margin-bottom: var(--space-10); text-align: left;">Learn to code with SnackPie step by step!</p>
+
     <!-- Lesson 1 -->
-    <article style="margin-bottom: var(--space-12);">
-      <h2 style="font-family: var(--font-display); font-size: var(--text-2xl); margin-bottom: var(--space-4); display: flex; align-items: center; gap: var(--space-2);">
-        <span style="background: var(--color-primary); color: var(--color-cocoa); width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: var(--text-sm);">1</span>
+    <article class="doc-article">
+      <h2 class="lesson-heading">
+        <span class="lesson-number">1</span>
         Your First Recipe
       </h2>
-      
+
       <p>Let's start with the simplest thing: making Chef SnackPie talk! In SnackPie, we use <code>say</code> to print text.</p>
-      
+
       <div class="code-block" style="margin: var(--space-4) 0;">
         <div class="code-block-header">
           <span>recipe.pie</span>
@@ -32,26 +28,26 @@ say 'Baking is fun!'
 say "Welcome to the kitchen!"</code></pre>
         </div>
       </div>
-      
+
       <p>This will output:</p>
       <div class="card-code" style="margin: var(--space-4) 0;">
-        <code>>>>>Hello, SnackPie!
->>>>Baking is fun!
->>>>Welcome to the kitchen!</code>
+        <code>>>>Hello, SnackPie!
+>>>Baking is fun!
+>>>Welcome to the kitchen!</code>
       </div>
-      
+
       <p><strong>Your turn!</strong> Open the <a href="{{ url_for('playground.index') }}">Playground</a> and try saying your own message!</p>
     </article>
-    
+
     <!-- Lesson 2 -->
-    <article style="margin-bottom: var(--space-12);">
-      <h2 style="font-family: var(--font-display); font-size: var(--text-2xl); margin-bottom: var(--space-4); display: flex; align-items: center; gap: var(--space-2);">
-        <span style="background: var(--color-primary); color: var(--color-cocoa); width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: var(--text-sm);">2</span>
+    <article class="doc-article">
+      <h2 class="lesson-heading">
+        <span class="lesson-number">2</span>
         Storing Ingredients (Variables)
       </h2>
-      
+
       <p>When you want to save a value, put it in a labeled jar using <code>=</code>!</p>
-      
+
       <div class="code-block" style="margin: var(--space-4) 0;">
         <div class="code-block-header">
           <span>recipe.pie</span>
@@ -64,12 +60,12 @@ cookies = "12"
 say cookies</code></pre>
         </div>
       </div>
-      
+
       <div class="card-code" style="margin: var(--space-4) 0;">
-        <code>>>>>Alex
->>>>12</code>
+        <code>>>>Alex
+>>>12</code>
       </div>
-      
+
       <p><strong>Secret Ingredients!</strong> Start the jar name with <code>_</code> to make it a constant that can't be changed:</p>
       <div class="code-block" style="margin: var(--space-4) 0;">
         <div class="code-block-body">
@@ -78,16 +74,16 @@ say _secret_sauce</code></pre>
         </div>
       </div>
     </article>
-    
+
     <!-- Lesson 3 -->
-    <article style="margin-bottom: var(--space-12);">
-      <h2 style="font-family: var(--font-display); font-size: var(--text-2xl); margin-bottom: var(--space-4); display: flex; align-items: center; gap: var(--space-2);">
-        <span style="background: var(--color-primary); color: var(--color-cocoa); width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: var(--text-sm);">3</span>
+    <article class="doc-article">
+      <h2 class="lesson-heading">
+        <span class="lesson-number">3</span>
         Kitchen Math
       </h2>
-      
+
       <p>Chef SnackPie is super fast at counting cookies! Just type a math problem:</p>
-      
+
       <div class="code-block" style="margin: var(--space-4) 0;">
         <div class="code-block-body">
           <pre><code>3 * 5
@@ -95,23 +91,23 @@ say _secret_sauce</code></pre>
 10 + 20</code></pre>
         </div>
       </div>
-      
+
       <div class="card-code" style="margin: var(--space-4) 0;">
-        <code>>>>>15
->>>>24.0
->>>>30</code>
+        <code>>>>15
+>>>24.0
+>>>30</code>
       </div>
     </article>
-    
+
     <!-- Lesson 4 -->
-    <article style="margin-bottom: var(--space-12);">
-      <h2 style="font-family: var(--font-display); font-size: var(--text-2xl); margin-bottom: var(--space-4); display: flex; align-items: center; gap: var(--space-2);">
-        <span style="background: var(--color-primary); color: var(--color-cocoa); width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: var(--text-sm);">4</span>
+    <article class="doc-article">
+      <h2 class="lesson-heading">
+        <span class="lesson-number">4</span>
         Asking Questions
       </h2>
-      
+
       <p>Need to get input from the user? Use <code>ask</code>!</p>
-      
+
       <div class="code-block" style="margin: var(--space-4) 0;">
         <div class="code-block-body">
           <pre><code>name = ask "What is your name? "
@@ -119,16 +115,16 @@ say "Hello, " + name + "!"</code></pre>
         </div>
       </div>
     </article>
-    
+
     <!-- Lesson 5 -->
-    <article style="margin-bottom: var(--space-12);">
-      <h2 style="font-family: var(--font-display); font-size: var(--text-2xl); margin-bottom: var(--space-4); display: flex; align-items: center; gap: var(--space-2);">
-        <span style="background: var(--color-primary); color: var(--color-cocoa); width: 32px; height: 32px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: var(--text-sm);">5</span>
+    <article class="doc-article">
+      <h2 class="lesson-heading">
+        <span class="lesson-number">5</span>
         Making Choices (If/Else)
       </h2>
-      
+
       <p>To make decisions, use an <code>if</code> block, add extra tests with <code>orif</code>, write a backup with <code>else</code>, and finish with <code>end</code>!</p>
-      
+
       <div class="code-block" style="margin: var(--space-4) 0;">
         <div class="code-block-header">
           <span>recipe.pie</span>
@@ -145,13 +141,13 @@ else:
 end</code></pre>
         </div>
       </div>
-      
+
       <p><strong>Important:</strong> Add a single space before instructions inside the taste test, so Chef SnackPie knows they belong to that step!</p>
     </article>
-    
-    <div style="text-align: center; padding: var(--space-8); background: var(--color-cream-darker); border-radius: var(--radius-xl); margin-top: var(--space-8);">
-      <h3 style="font-family: var(--font-display); margin-bottom: var(--space-4);">Ready to bake more? 🥧</h3>
-      <p style="margin-bottom: var(--space-4); color: var(--color-text-secondary);">Try these recipes in the Playground!</p>
+
+    <div class="cta-box">
+      <h3>Ready to bake more? 🥧</h3>
+      <p>Try these recipes in the Playground!</p>
       <a href="{{ url_for('playground.index') }}" class="btn btn-primary">🍳 Open Playground</a>
     </div>
   </div>

@@ -4,19 +4,13 @@
 
 {% block content %}
 <section class="section">
-  <div class="container" style="max-width: 700px;">
-    <h1 style="font-family: var(--font-display); font-size: var(--text-3xl); margin-bottom: var(--space-2);">
-      🍕 Cookbook
-    </h1>
-    <p style="color: var(--color-text-secondary); margin-bottom: var(--space-8);">
-      Ready-to-use recipes and patterns for common tasks!
-    </p>
-    
+  <div class="container page-narrow">
+    <h1 class="page-title">🍕 Cookbook</h1>
+    <p class="page-subtitle" style="margin-bottom: var(--space-10); text-align: left;">Ready-to-use recipes and patterns for common tasks!</p>
+
     <!-- Recipe 1: Counter -->
-    <article style="margin-bottom: var(--space-8);">
-      <h2 style="font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-4);">
-        📊 Score Counter
-      </h2>
+    <article class="doc-article" style="margin-bottom: var(--space-10);">
+      <h2 class="doc-section-title">📊 Score Counter</h2>
       <p>Track a score or count that changes over time.</p>
       <div class="code-block" style="margin: var(--space-4) 0;">
         <div class="code-block-body">
@@ -28,12 +22,10 @@ say score</code></pre>
         </div>
       </div>
     </article>
-    
+
     <!-- Recipe 2: Decision Tree -->
-    <article style="margin-bottom: var(--space-8);">
-      <h2 style="font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-4);">
-        🧭 Grade Checker
-      </h2>
+    <article class="doc-article" style="margin-bottom: var(--space-10);">
+      <h2 class="doc-section-title">🧭 Grade Checker</h2>
       <p>Check a score and assign a grade.</p>
       <div class="code-block" style="margin: var(--space-4) 0;">
         <div class="code-block-body">
@@ -53,12 +45,10 @@ end</code></pre>
         </div>
       </div>
     </article>
-    
+
     <!-- Recipe 3: Calculator -->
-    <article style="margin-bottom: var(--space-8);">
-      <h2 style="font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-4);">
-        🧮 Simple Calculator
-      </h2>
+    <article class="doc-article" style="margin-bottom: var(--space-10);">
+      <h2 class="doc-section-title">🧮 Simple Calculator</h2>
       <p>Perform calculations with variables.</p>
       <div class="code-block" style="margin: var(--space-4) 0;">
         <div class="code-block-body">
@@ -72,12 +62,10 @@ say a / b</code></pre>
         </div>
       </div>
     </article>
-    
+
     <!-- Recipe 4: Even/Odd -->
-    <article style="margin-bottom: var(--space-8);">
-      <h2 style="font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-4);">
-        🔢 Even or Odd?
-      </h2>
+    <article class="doc-article" style="margin-bottom: var(--space-10);">
+      <h2 class="doc-section-title">🔢 Even or Odd?</h2>
       <p>Check if a number is even or odd.</p>
       <div class="code-block" style="margin: var(--space-4) 0;">
         <div class="code-block-body">
@@ -92,10 +80,10 @@ end</code></pre>
         </div>
       </div>
     </article>
-    
-    <div style="text-align: center; padding: var(--space-8); background: var(--color-cream-darker); border-radius: var(--radius-xl); margin-top: var(--space-8);">
-      <h3 style="font-family: var(--font-display); margin-bottom: var(--space-4);">Want more recipes? 🍳</h3>
-      <p style="margin-bottom: var(--space-4); color: var(--color-text-secondary);">Check out the examples gallery!</p>
+
+    <div class="cta-box">
+      <h3>Want more recipes? 🍳</h3>
+      <p>Check out the examples gallery!</p>
       <a href="{{ url_for('examples.index') }}" class="btn btn-primary">🍕 Browse Examples</a>
     </div>
   </div>

@@ -4,19 +4,13 @@
 
 {% block content %}
 <section class="section">
-  <div class="container" style="max-width: 700px;">
-    <h1 style="font-family: var(--font-display); font-size: var(--text-3xl); margin-bottom: var(--space-2);">
-      📋 Language Reference
-    </h1>
-    <p style="color: var(--color-text-secondary); margin-bottom: var(--space-8);">
-      Complete guide to SnackPie syntax.
-    </p>
-    
+  <div class="container page-narrow">
+    <h1 class="page-title">📋 Language Reference</h1>
+    <p class="page-subtitle" style="margin-bottom: var(--space-10); text-align: left;">Complete guide to SnackPie syntax.</p>
+
     <!-- Say -->
-    <article style="margin-bottom: var(--space-8);">
-      <h2 style="font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-4);">
-        say
-      </h2>
+    <article class="doc-article" style="margin-bottom: var(--space-10);">
+      <h2 class="doc-section-title">say</h2>
       <p>Print text or values to the screen.</p>
       <div class="code-block" style="margin: var(--space-4) 0;">
         <div class="code-block-body">
@@ -26,12 +20,10 @@ say variable_name</code></pre>
         </div>
       </div>
     </article>
-    
+
     <!-- Ask -->
-    <article style="margin-bottom: var(--space-8);">
-      <h2 style="font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-4);">
-        ask
-      </h2>
+    <article class="doc-article" style="margin-bottom: var(--space-10);">
+      <h2 class="doc-section-title">ask</h2>
       <p>Get input from the user.</p>
       <div class="code-block" style="margin: var(--space-4) 0;">
         <div class="code-block-body">
@@ -39,12 +31,10 @@ say variable_name</code></pre>
         </div>
       </div>
     </article>
-    
+
     <!-- Variables -->
-    <article style="margin-bottom: var(--space-8);">
-      <h2 style="font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-4);">
-        Variables
-      </h2>
+    <article class="doc-article" style="margin-bottom: var(--space-10);">
+      <h2 class="doc-section-title">Variables</h2>
       <p>Store values in labeled jars using <code>=</code>.</p>
       <div class="code-block" style="margin: var(--space-4) 0;">
         <div class="code-block-body">
@@ -54,12 +44,10 @@ score = 100</code></pre>
         </div>
       </div>
     </article>
-    
+
     <!-- Constants -->
-    <article style="margin-bottom: var(--space-8);">
-      <h2 style="font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-4);">
-        Constants
-      </h2>
+    <article class="doc-article" style="margin-bottom: var(--space-10);">
+      <h2 class="doc-section-title">Constants</h2>
       <p>Protect values with <code>_</code> prefix. Cannot be changed!</p>
       <div class="code-block" style="margin: var(--space-4) 0;">
         <div class="code-block-body">
@@ -68,12 +56,10 @@ _secret = "new"  # ERROR!</code></pre>
         </div>
       </div>
     </article>
-    
+
     <!-- Math -->
-    <article style="margin-bottom: var(--space-8);">
-      <h2 style="font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-4);">
-        Math Operations
-      </h2>
+    <article class="doc-article" style="margin-bottom: var(--space-10);">
+      <h2 class="doc-section-title">Math Operations</h2>
       <p>Perform calculations.</p>
       <div class="code-block" style="margin: var(--space-4) 0;">
         <div class="code-block-body">
@@ -84,12 +70,10 @@ _secret = "new"  # ERROR!</code></pre>
         </div>
       </div>
     </article>
-    
+
     <!-- Conditionals -->
-    <article style="margin-bottom: var(--space-8);">
-      <h2 style="font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-4);">
-        Conditionals (if/orif/else)
-      </h2>
+    <article class="doc-article" style="margin-bottom: var(--space-10);">
+      <h2 class="doc-section-title">Conditionals (if/orif/else)</h2>
       <p>Make decisions in your code.</p>
       <div class="code-block" style="margin: var(--space-4) 0;">
         <div class="code-block-body">
@@ -102,7 +86,7 @@ else:
 end</code></pre>
         </div>
       </div>
-      
+
       <p style="margin-top: var(--space-4);"><strong>Comparison operators:</strong></p>
       <ul>
         <li><code>==</code> - Equal to</li>
@@ -113,10 +97,10 @@ end</code></pre>
         <li><code><=</code> - Less than or equal</li>
       </ul>
     </article>
-    
-    <div style="text-align: center; padding: var(--space-8); background: var(--color-cream-darker); border-radius: var(--radius-xl); margin-top: var(--space-8);">
-      <h3 style="font-family: var(--font-display); margin-bottom: var(--space-4);">Try it live! 🍳</h3>
-      <p style="margin-bottom: var(--space-4); color: var(--color-text-secondary);">Open the playground to experiment with these commands.</p>
+
+    <div class="cta-box">
+      <h3>Try it live! 🍳</h3>
+      <p>Open the playground to experiment with these commands.</p>
       <a href="{{ url_for('playground.index') }}" class="btn btn-primary">👨‍🍳 Open Playground</a>
     </div>
   </div>

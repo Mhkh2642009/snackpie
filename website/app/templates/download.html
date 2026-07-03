@@ -4,30 +4,24 @@
 
 {% block content %}
 <section class="section">
-  <div class="container" style="max-width: 700px; text-align: center;">
-    <h1 style="font-family: var(--font-display); font-size: var(--text-3xl); margin-bottom: var(--space-4);">
-      📦 Get SnackPie
-    </h1>
-    <p style="font-size: var(--text-lg); color: var(--color-text-secondary); margin-bottom: var(--space-12);">
-      Install SnackPie on your computer and start baking!
-    </p>
-    
+  <div class="container page-narrow" style="text-align: center;">
+    <div class="page-header">
+      <h1 class="page-title">📦 Get SnackPie</h1>
+      <p class="page-subtitle">Install SnackPie on your computer and start baking!</p>
+    </div>
+
     <!-- Quick Start (Online) -->
-    <div class="card" style="margin-bottom: var(--space-8); text-align: left;">
-      <h2 style="font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-4);">
-        🌐 Quick Start (No Installation)
-      </h2>
-      <p style="margin-bottom: var(--space-4);">Try SnackPie right now in your browser!</p>
+    <div class="card" style="margin-bottom: var(--space-6); text-align: left;">
+      <h2 class="doc-section-title">🌐 Quick Start (No Installation)</h2>
+      <p>Try SnackPie right now in your browser!</p>
       <a href="{{ url_for('playground.index') }}" class="btn btn-primary">🍳 Open Playground</a>
     </div>
-    
+
     <!-- Install from GitHub -->
-    <div class="card" style="margin-bottom: var(--space-8); text-align: left;">
-      <h2 style="font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-4);">
-        💻 Install from GitHub
-      </h2>
-      <p style="margin-bottom: var(--space-4);">Clone the repository and run locally:</p>
-      
+    <div class="card" style="margin-bottom: var(--space-6); text-align: left;">
+      <h2 class="doc-section-title">💻 Install from GitHub</h2>
+      <p>Clone the repository and run locally:</p>
+
       <div class="code-block" style="margin-bottom: var(--space-4);">
         <div class="code-block-header">
           <span>Terminal</span>
@@ -44,17 +38,15 @@ python3 snackpie.py
 python3 interpreter.py</code></pre>
         </div>
       </div>
-      
-      <p style="font-size: var(--text-sm); color: var(--color-text-muted);">
+
+      <p style="font-size: var(--text-sm); color: var(--color-text-muted); margin: 0;">
         Requires Python 3.10 or higher.
       </p>
     </div>
-    
+
     <!-- System Requirements -->
     <div class="card" style="text-align: left;">
-      <h2 style="font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-4);">
-        📋 System Requirements
-      </h2>
+      <h2 class="doc-section-title">📋 System Requirements</h2>
       <ul style="margin-left: var(--space-6);">
         <li>Python 3.10 or higher</li>
         <li>Any operating system (Windows, macOS, Linux)</li>
