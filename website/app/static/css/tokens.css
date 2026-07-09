@@ -1,64 +1,85 @@
 /* ==========================================================================
-   SNACKPIE DESIGN TOKENS — "Cosmic Kitchen" Identity
+   SNACKPIE DESIGN TOKENS - SnackPie Brand Identity
    ==========================================================================
-   A dark-first theme inspired by a magical midnight kitchen.
-   Deep space backgrounds, vivid food-colored neons, crystal-clear contrast.
-   Text is always light on dark — never same-hue as background.
+   Palette built from two color groups:
+     Warm/cool lights: #F9E8A2 #B4E1EB #95BDD7 #78A4CB
+     Royal blue + pale: #293681 #4274D9 #95CCDD #D0E7E6
+   Supports light + dark themes via [data-theme].
    ========================================================================== */
 
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
+  color-scheme: light;
+
+  /* === RAW PALETTE (shared, theme-independent) === */
+  --brand-amber:   #F2A81D;
+  --brand-pumpkin: #F2790F;
+  --brand-orange:  #F2620F;
+  --brand-cinnamon:#A67165;
+  --brand-ink:     #010001;
+  --brand-peach:   #F4C49D;
+
+  --c-yellow:    #F9E8A2;
+  --c-mist:      #B4E1EB;
+  --c-steel:     #95BDD7;
+  --c-muted:     #78A4CB;
+  --c-royal:     #293681;
+  --c-blue:      #4274D9;
+  --c-cyan:      #95CCDD;
+  --c-aqua:      #D0E7E6;
+  --c-red:       #D64545;
+  --c-red-dark:  #B91C1C;
+  --c-red-light: #F87171;
+
   /* -------------------------------------------------------------------------
-     COSMIC KITCHEN PALETTE
-     Deep space bases + vivid food-neon accents
-     Every text/bg pair is high-contrast by design
+     LIGHT THEME (default)
      ------------------------------------------------------------------------- */
+  --color-primary-blue:   var(--c-blue);
+  --color-secondary-blue: var(--c-muted);
+  --color-aqua:           var(--c-yellow);
+  --color-ice:            var(--c-aqua);
+  --color-white:          #FFFFFF;
+  --color-dark-blue:      var(--c-royal);
+  --color-blue-border:    var(--c-cyan);
 
-  /* === SPACE BASE (Backgrounds) === */
-  --color-void:        #09090F;   /* Deep space — page background */
-  --color-space:       #0F0E1A;   /* Card surface */
-  --color-nebula:      #161525;   /* Elevated surface, hover state */
-  --color-crater:      #1E1C30;   /* Border-level surface */
-  --color-surface:     #252340;   /* Input backgrounds, toolbar */
+  /* Legacy aliases kept so existing components inherit the new identity. */
+  --color-void:        var(--c-aqua);
+  --color-space:       #FFFFFF;
+  --color-nebula:      #E9F4F3;
+  --color-crater:      var(--c-cyan);
+  --color-surface:     #ECF5F7;
 
-  /* === NEON ACCENTS (Food-themed vivid colors) === */
-  /* Coral Red — primary brand: cherry pie, tomato sauce */
-  --color-cherry:        #FF4D6D;
-  --color-cherry-dark:   #D63254;
-  --color-cherry-light:  #FF8FA3;
-  --color-cherry-glow:   rgba(255, 77, 109, 0.25);
-  --color-cherry-dim:    rgba(255, 77, 109, 0.12);
+  --color-cherry:        var(--brand-orange);
+  --color-cherry-dark:   #C84A08;
+  --color-cherry-light:  var(--brand-peach);
+  --color-cherry-glow:   rgba(245, 107, 7, 0.24);
+  --color-cherry-dim:    rgba(245, 107, 7, 0.12);
 
-  /* Electric Teal — secondary: mint, lime soda */
-  --color-mint:          #00D9C0;
-  --color-mint-dark:     #00B5A0;
-  --color-mint-light:    #80EDE3;
-  --color-mint-glow:     rgba(0, 217, 192, 0.2);
-  --color-mint-dim:      rgba(0, 217, 192, 0.10);
+  --color-mint:          var(--c-muted);
+  --color-mint-dark:     #5E86B0;
+  --color-mint-light:    var(--c-mist);
+  --color-mint-glow:     rgba(120, 164, 203, 0.22);
+  --color-mint-dim:      rgba(120, 164, 203, 0.12);
 
-  /* Solar Gold — accent: honey, golden crust */
-  --color-honey:         #FFD23F;
-  --color-honey-dark:    #E6B800;
-  --color-honey-light:   #FFE57A;
-  --color-honey-glow:    rgba(255, 210, 63, 0.2);
-  --color-honey-dim:     rgba(255, 210, 63, 0.10);
+  --color-honey:         var(--brand-amber);
+  --color-honey-dark:    #C98209;
+  --color-honey-light:   #FFE3A1;
+  --color-honey-glow:    rgba(254, 189, 29, 0.30);
+  --color-honey-dim:     rgba(254, 189, 29, 0.18);
 
-  /* Blueberry Purple — success, positive feedback */
-  --color-berry:         #7C4DFF;
-  --color-berry-dark:    #5E35B1;
-  --color-berry-light:   #B39DDB;
+  --color-berry:         var(--c-blue);
+  --color-berry-dark:    #2F5FB8;
+  --color-berry-light:   var(--c-cyan);
 
-  /* Paprika Red — errors, warnings */
-  --color-paprika:       #FF5252;
-  --color-paprika-dark:  #D32F2F;
-  --color-paprika-light: #FF8A80;
+  --color-paprika:       var(--c-red);
+  --color-paprika-dark:  var(--c-red-dark);
+  --color-paprika-light: var(--c-red-light);
 
-  /* === STELLAR TEXT (Always light on dark — guaranteed contrast) === */
-  --color-star:          #F0EEFF;   /* Primary text — near white with purple tint */
-  --color-comet:         #C8C2F0;   /* Secondary text — soft lavender */
-  --color-dust:          #8882B8;   /* Muted text — still 4.5:1+ on dark bg */
-  --color-dim:           #5A5680;   /* Disabled/very subtle text */
+  --color-star:          var(--c-royal);
+  --color-comet:         #3A4A8C;
+  --color-dust:          #5C6BA0;
+  --color-dim:           #8A95B8;
 
   /* === SEMANTIC ALIASES === */
   --color-primary:              var(--color-cherry);
@@ -66,26 +87,26 @@
   --color-primary-light:        var(--color-cherry-dim);
   --color-primary-glow:         var(--color-cherry-glow);
 
-  --color-secondary:            var(--color-mint);
-  --color-secondary-hover:      var(--color-mint-dark);
-  --color-secondary-light:      var(--color-mint-dim);
-  --color-secondary-glow:       var(--color-mint-glow);
+  --color-secondary:            var(--color-honey);
+  --color-secondary-hover:      var(--color-honey-dark);
+  --color-secondary-light:      var(--color-honey-dim);
+  --color-secondary-glow:       var(--color-honey-glow);
 
   --color-accent:               var(--color-honey);
   --color-accent-hover:         var(--color-honey-dark);
   --color-accent-light:         var(--color-honey-dim);
   --color-accent-glow:          var(--color-honey-glow);
 
-  --color-success:              var(--color-mint);
+  --color-success:              var(--c-muted);
   --color-success-hover:        var(--color-mint-dark);
-  --color-success-light:        rgba(0, 217, 192, 0.15);
+  --color-success-light:        rgba(120, 164, 203, 0.15);
 
   --color-error:                var(--color-paprika);
   --color-error-hover:          var(--color-paprika-dark);
-  --color-error-light:          rgba(255, 82, 82, 0.15);
+  --color-error-light:          rgba(214, 69, 69, 0.15);
 
   --color-warning:              var(--color-honey);
-  --color-warning-light:        rgba(255, 210, 63, 0.15);
+  --color-warning-light:        var(--color-honey-dim);
 
   /* Background system */
   --color-bg:                   var(--color-void);
@@ -93,26 +114,129 @@
   --color-bg-elevated:          var(--color-nebula);
   --color-bg-toolbar:           var(--color-surface);
 
-  /* Text system — all high-contrast on dark backgrounds */
+  /* Text system */
   --color-text-primary:         var(--color-star);
   --color-text-secondary:       var(--color-comet);
   --color-text-muted:           var(--color-dust);
   --color-text-disabled:        var(--color-dim);
-  --color-text-on-primary:      #09090F;   /* Dark text on light accent buttons */
+  --color-text-on-primary:      var(--color-white);
   --color-text-on-dark:         var(--color-star);
-  --color-text-code:            var(--color-honey-light);  /* Code keywords */
+  --color-text-code:            var(--color-berry-dark);
 
   /* Border system */
-  --color-border:               rgba(200, 194, 240, 0.08);
-  --color-border-strong:        rgba(200, 194, 240, 0.16);
+  --color-border:               var(--color-blue-border);
+  --color-border-strong:        #BFE0E0;
   --color-border-focus:         var(--color-cherry);
   --color-border-error:         var(--color-paprika);
 
+  /* Shadows (light) */
+  --shadow-sm:   0 1px 3px rgba(41,54,129,0.08), 0 1px 2px rgba(41,54,129,0.06);
+  --shadow-md:   0 4px 16px rgba(41,54,129,0.12), 0 2px 4px rgba(41,54,129,0.08);
+  --shadow-lg:   0 12px 32px rgba(41,54,129,0.16), 0 4px 8px rgba(41,54,129,0.08);
+  --shadow-xl:   0 24px 48px rgba(41,54,129,0.18), 0 8px 16px rgba(41,54,129,0.10);
+  --shadow-inner: inset 0 2px 6px rgba(41,54,129,0.10);
+  --shadow-focus: 0 0 0 3px rgba(66, 116, 217, 0.35);
+  --shadow-glow:  0 0 32px rgba(249, 232, 162, 0.30), 0 0 64px rgba(66, 116, 217, 0.10);
+  --shadow-card:  0 2px 8px rgba(41,54,129,0.08), 0 0 0 1px rgba(149,204,221,0.60);
+  --shadow-card-hover: 0 8px 32px rgba(41,54,129,0.14), 0 0 0 1px rgba(66,116,217,0.30);
+
+  /* Gradients (light) */
+  --gradient-hero:    linear-gradient(135deg, #D0E7E6 0%, #E9F4F3 48%, #FFFFFF 100%);
+  --gradient-primary: linear-gradient(135deg, var(--brand-orange) 0%, var(--brand-pumpkin) 48%, var(--brand-amber) 100%);
+  --gradient-accent:  linear-gradient(135deg, var(--brand-amber) 0%, var(--brand-peach) 100%);
+  --gradient-cta:     linear-gradient(135deg, #ECF5F7 0%, #FFFFFF 48%, var(--c-aqua) 100%);
+  --gradient-card:    linear-gradient(145deg, #FFFFFF 0%, #F0F8F7 100%);
+
+  /* Glass (light) */
+  --glass-bg:     rgba(255, 255, 255, 0.86);
+  --glass-border: rgba(149, 204, 221, 0.70);
+  --glass-blur:   20px;
+}
+
+/* -------------------------------------------------------------------------
+   DARK THEME
+   ------------------------------------------------------------------------- */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-void:        #18204A;
+  --color-space:       #202A5A;
+  --color-nebula:      #283469;
+  --color-crater:      #354276;
+  --color-surface:     #253060;
+  --color-white:       #202A5A;
+  --color-dark-blue:   #F6F3DE;
+  --color-blue-border: rgba(208, 231, 230, 0.22);
+
+  --color-cherry:        #F2790F;
+  --color-cherry-dark:   #F2A81D;
+  --color-cherry-light:  #F4C49D;
+  --color-cherry-glow:   rgba(242, 168, 29, 0.22);
+  --color-cherry-dim:    rgba(242, 98, 15, 0.14);
+
+  --color-mint:          #D0E7E6;
+  --color-mint-dark:     #B4E1EB;
+  --color-mint-light:    #E5F2EF;
+  --color-mint-glow:     rgba(208, 231, 230, 0.18);
+  --color-mint-dim:      rgba(208, 231, 230, 0.10);
+
+  --color-honey:         #F9E8A2;
+  --color-honey-dark:    #EAD890;
+  --color-honey-light:   #FFF3BF;
+  --color-honey-glow:    rgba(249, 232, 162, 0.20);
+  --color-honey-dim:     rgba(249, 232, 162, 0.10);
+
+  --color-berry:         #9CB8E8;
+  --color-berry-dark:    #B8CDF1;
+  --color-berry-light:   #D4E1F7;
+
+  --color-star:          #F6F3DE;
+  --color-comet:         #DDEAF0;
+  --color-dust:          #B9C9D7;
+  --color-dim:           #8797B8;
+
+  --color-bg:            var(--color-void);
+  --color-bg-card:       var(--color-space);
+  --color-bg-elevated:   var(--color-nebula);
+  --color-bg-toolbar:    var(--color-surface);
+
+  --color-text-primary:         var(--color-star);
+  --color-text-secondary:       var(--color-comet);
+  --color-text-muted:           var(--color-dust);
+  --color-text-disabled:        var(--color-dim);
+  --color-text-on-primary:      #FFFFFF;
+  --color-text-on-dark:         var(--color-star);
+  --color-text-code:            var(--color-honey-light);
+
+  --color-border:               rgba(208, 231, 230, 0.18);
+  --color-border-strong:        rgba(208, 231, 230, 0.30);
+  --color-border-focus:         var(--color-cherry);
+  --color-border-error:         var(--color-paprika);
+
+  --shadow-sm:   0 1px 3px rgba(0,0,0,0.34), 0 1px 2px rgba(0,0,0,0.24);
+  --shadow-md:   0 6px 18px rgba(0,0,0,0.42), 0 2px 6px rgba(0,0,0,0.26);
+  --shadow-lg:   0 14px 36px rgba(0,0,0,0.50), 0 4px 10px rgba(0,0,0,0.28);
+  --shadow-xl:   0 28px 56px rgba(0,0,0,0.58), 0 10px 18px rgba(0,0,0,0.32);
+  --shadow-inner: inset 0 2px 8px rgba(0,0,0,0.34);
+  --shadow-focus: 0 0 0 3px rgba(249, 232, 162, 0.34);
+  --shadow-glow:  0 0 28px rgba(208, 231, 230, 0.12), 0 0 56px rgba(249, 232, 162, 0.08);
+  --shadow-card:  0 4px 14px rgba(0,0,0,0.26), 0 0 0 1px rgba(208,231,230,0.10);
+  --shadow-card-hover: 0 12px 34px rgba(0,0,0,0.36), 0 0 0 1px rgba(208,231,230,0.22);
+
+  --gradient-hero:    radial-gradient(circle at 18% 12%, rgba(249,232,162,0.10) 0%, transparent 34%), linear-gradient(135deg, #18204A 0%, #202A5A 52%, #283469 100%);
+  --gradient-primary: linear-gradient(135deg, #F2620F 0%, #F2790F 55%, #F2A81D 100%);
+  --gradient-accent:  linear-gradient(135deg, #F2A81D 0%, #F4C49D 100%);
+  --gradient-cta:     radial-gradient(circle at 50% -20%, rgba(249,232,162,0.10) 0%, transparent 48%), linear-gradient(135deg, #202A5A 0%, #18204A 55%, #283469 100%);
+  --gradient-card:    linear-gradient(145deg, #202A5A 0%, #253060 58%, #283469 100%);
+
+  --glass-bg:     rgba(24, 32, 74, 0.86);
+  --glass-border: rgba(208, 231, 230, 0.16);
+  --glass-blur:   20px;
+}
+
+:root {
   /* -------------------------------------------------------------------------
-     TYPOGRAPHY — Bold, rounded, playful
-     Fredoka One: display headings — round and joyful
-     Nunito: body — extremely legible
-     JetBrains Mono: code
+     TYPOGRAPHY
      ------------------------------------------------------------------------- */
   --font-display:  'Fredoka One', 'Fredoka', system-ui, sans-serif;
   --font-ui:       'Nunito', system-ui, sans-serif;
@@ -177,19 +301,6 @@
   --radius-full:  9999px;
 
   /* -------------------------------------------------------------------------
-     SHADOWS — Deep with color-tinted glows
-     ------------------------------------------------------------------------- */
-  --shadow-sm:   0 1px 3px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3);
-  --shadow-md:   0 4px 16px rgba(0,0,0,0.5), 0 2px 4px rgba(0,0,0,0.3);
-  --shadow-lg:   0 12px 32px rgba(0,0,0,0.6), 0 4px 8px rgba(0,0,0,0.3);
-  --shadow-xl:   0 24px 48px rgba(0,0,0,0.7), 0 8px 16px rgba(0,0,0,0.4);
-  --shadow-inner: inset 0 2px 6px rgba(0,0,0,0.4);
-  --shadow-focus: 0 0 0 3px rgba(255, 77, 109, 0.4);
-  --shadow-glow:  0 0 32px rgba(255, 77, 109, 0.15), 0 0 64px rgba(255, 77, 109, 0.06);
-  --shadow-card:  0 2px 8px rgba(0,0,0,0.4), 0 0 0 1px rgba(200,194,240,0.06);
-  --shadow-card-hover: 0 8px 32px rgba(0,0,0,0.6), 0 0 0 1px rgba(255,77,109,0.2);
-
-  /* -------------------------------------------------------------------------
      TRANSITIONS
      ------------------------------------------------------------------------- */
   --transition-fast:   120ms ease-out;
@@ -207,25 +318,7 @@
   --z-modal:          400;
   --z-toast:          500;
   --z-tooltip:        600;
-
-  /* -------------------------------------------------------------------------
-     GRADIENTS — Cosmic and rich
-     ------------------------------------------------------------------------- */
-  --gradient-hero:    linear-gradient(135deg, #09090F 0%, #0F0E1A 40%, #130F22 100%);
-  --gradient-primary: linear-gradient(135deg, var(--color-cherry) 0%, #FF7043 100%);
-  --gradient-accent:  linear-gradient(135deg, var(--color-honey) 0%, var(--color-cherry-light) 100%);
-  --gradient-cta:     linear-gradient(135deg, #0F0E1A 0%, #130F22 50%, #1A1040 100%);
-  --gradient-card:    linear-gradient(145deg, var(--color-space) 0%, var(--color-nebula) 100%);
-
-  /* -------------------------------------------------------------------------
-     GLASS — Dark glass panels
-     ------------------------------------------------------------------------- */
-  --glass-bg:     rgba(15, 14, 26, 0.85);
-  --glass-border: rgba(200, 194, 240, 0.10);
-  --glass-blur:   20px;
 }
-
-/* No light mode override needed — design is dark-first, always high contrast */
 
 /* ==========================================================================
    REDUCED MOTION

@@ -95,9 +95,11 @@ class VAR:
         if not n or not v:
             pass
         else:
+            from_ask = False
             if 'ask' in v:
                 inp = list(map(str.lstrip, v.split('ask')))
                 v = ASk(inp[-1]).value
+                from_ask = True
             if VAR().is_v(n):
                 if n.startswith('_'):
                     print('ERROR: This is a const, it can\'t be changed')
@@ -112,7 +114,7 @@ class VAR:
                 gu_re = re.findall(r"\d+(?:\.\d+)?|[+\-*/]", v)
                 if gu_re:
                     v = str(calc(gu_re))
-                elif not VAR().is_v(v):
+                elif not from_ask and not VAR().is_v(v):
                     raise TypeError("ERROR: I think that you're missing \" or ' :>")
             
             t = cls.ver_type(v)
@@ -358,7 +360,6 @@ def prog(com, ig=False):
                     raise TypeError("ERROR: I think that you're missing \" or ' :>")
                 rel_v = ask_re.group(3)
             print(ASk(rel_v))
-            print("ENTER IF:", command)
         elif gu_re:
             print(SAY(calc(gu_re)))
         elif command == 'exit()':

@@ -41,9 +41,6 @@ class SnackPieRunner:
         
         def mock_input(prompt=""):
             """Mock input() to use pre-supplied values."""
-            # Print the prompt to stdout (mimicking real behavior)
-            if prompt:
-                print(f'"{prompt}"', end='')
             try:
                 return next(input_iter)
             except StopIteration:

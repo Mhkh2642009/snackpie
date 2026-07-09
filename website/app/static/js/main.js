@@ -6,11 +6,13 @@
 // Mobile menu toggle
 function toggleMobileMenu() {
   const menu = document.getElementById('mobileMenu');
-  const btn = document.querySelector('.nav-menu-btn');
+  const backdrop = document.getElementById('mobileMenuBackdrop');
+  const btn = document.getElementById('navMenuBtn');
   const isOpen = menu.classList.contains('open');
   
   menu.classList.toggle('open');
-  btn.setAttribute('aria-expanded', !isOpen);
+  if (backdrop) backdrop.classList.toggle('open');
+  if (btn) btn.setAttribute('aria-expanded', String(!isOpen));
   
   // Prevent body scroll when menu is open
   document.body.style.overflow = isOpen ? '' : 'hidden';
@@ -61,6 +63,34 @@ if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
   document.querySelectorAll('.card, .feature-card').forEach(el => {
     observer.observe(el);
   });
+}
+
+// Nav reacts to scroll position and visible page section
+const nav = document.querySelector('.nav');
+const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+const sections = Array.from(document.querySelectorAll('main section[id], main article[id]'));
+
+function updateNavOnScroll() {
+  if (nav) nav.classList.toggle('scrolled', window.scrollY > 12);
+}
+
+updateNavOnScroll();
+window.addEventListener('scroll', updateNavOnScroll, { passive: true });
+
+if (sections.length > 0) {
+  const sectionObserver = new IntersectionObserver((entries) => {
+    const visible = entries
+      .filter(entry => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+
+    if (!visible) return;
+    const id = visible.target.id;
+    document.querySelectorAll('.docs-toc-link').forEach(link => {
+      link.classList.toggle('section-active', link.getAttribute('href') === `#${id}`);
+    });
+  }, { rootMargin: '-25% 0px -55% 0px', threshold: [0.1, 0.4, 0.7] });
+
+  sections.forEach(section => sectionObserver.observe(section));
 }
 
 // Copy to clipboard utility
@@ -124,10 +154,58 @@ function debounce(fn, delay) {
   };
 }
 
+// Theme toggle (light/dark), persisted to localStorage
+function getStoredTheme() {
+  try { return localStorage.getItem('snackpie-theme'); } catch { return null; }
+}
+
+function applyTheme(theme) {
+  if (theme === 'dark' || theme === 'light') {
+    document.documentElement.setAttribute('data-theme', theme);
+  }
+
+  const activeTheme = theme === 'dark' ? 'dark' : 'light';
+  const btn = document.getElementById('themeToggle');
+  if (btn) {
+    btn.setAttribute('aria-pressed', activeTheme === 'dark' ? 'true' : 'false');
+    btn.setAttribute('aria-label', activeTheme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme');
+  }
+
+  const metaTheme = document.querySelector('meta[name="theme-color"]');
+  if (metaTheme) metaTheme.setAttribute('content', activeTheme === 'dark' ? '#293681' : '#D0E7E6');
+}
+
+function toggleTheme() {
+  const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+  const next = current === 'dark' ? 'light' : 'dark';
+  applyTheme(next);
+  try { localStorage.setItem('snackpie-theme', next); } catch {}
+}
+
+// Sync toggle state on load
+document.addEventListener('DOMContentLoaded', () => {
+  const stored = getStoredTheme();
+  const theme = stored || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  applyTheme(theme);
+});
+
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (event) => {
+  if (!getStoredTheme()) applyTheme(event.matches ? 'dark' : 'light');
+});
+
+window.addEventListener('load', () => {
+  const loadingScreen = document.getElementById('loadingScreen');
+  if (!loadingScreen) return;
+  setTimeout(() => loadingScreen.classList.add('hidden'), 450);
+  setTimeout(() => loadingScreen.remove(), 900);
+});
+
 // Export for use in other scripts
 window.SnackPie = {
   toggleMobileMenu,
   copyToClipboard,
   Storage,
-  debounce
+  debounce,
+  toggleTheme,
+  applyTheme
 };

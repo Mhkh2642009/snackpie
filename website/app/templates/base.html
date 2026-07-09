@@ -4,53 +4,79 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="{{ meta_description | default('SnackPie - The Easiest Programming Language for Kid Chefs! Write recipes, not code. A friendly language bridging Scratch and Python.') }}">
-  <meta name="theme-color" content="#F4D35E">
-  
+  <meta name="theme-color" content="#D0E7E6">
+  <link rel="icon" type="image/png" href="{{ url_for('static', filename='snackpie_logo.png') }}">
+  <link rel="apple-touch-icon" href="{{ url_for('static', filename='snackpie_logo.png') }}">
+
   <title>{% block title %}{{ site_name }}{% endblock %} | {{ site_tagline }}</title>
-  
+
+  <!-- Apply saved theme before paint to prevent flash -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('snackpie-theme');
+        var system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        var theme = saved === 'dark' || saved === 'light' ? saved : system;
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {}
+    })();
+  </script>
+
   <!-- Preconnect for fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  
+
   <!-- Google Fonts: Fredoka (display), Nunito (UI), JetBrains Mono (code) -->
   <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  
+
   <!-- CSS Tokens + Base + Components -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/tokens.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/components.css') }}">
-  
+
   {% block head %}{% endblock %}
 </head>
 <body>
   <!-- Skip link for accessibility -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
-  
+
   <!-- Navigation -->
   <nav class="nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="{{ url_for('main.index') }}" class="nav-logo" aria-label="{{ site_name }} home">
-        <span class="nav-logo-icon" aria-hidden="true">🥧</span>
+        <video class="nav-logo-icon nav-logo-video" autoplay muted playsinline loop preload="metadata" poster="{{ url_for('static', filename='snackpie_logo.png') }}" aria-hidden="true">
+          <source src="{{ url_for('static', filename='logo-animation.mp4') }}" type="video/mp4">
+        </video>
         <span>{{ site_name }}</span>
       </a>
-      
+
       <ul class="nav-links">
-        <li><a href="{{ url_for('main.index') }}" class="nav-link {% if request.endpoint == 'main.index' %}active{% endif %}">Home</a></li>
-        <li><a href="{{ url_for('playground.index') }}" class="nav-link {% if request.endpoint == 'playground.index' %}active{% endif %}">Playground</a></li>
-        <li><a href="{{ url_for('docs.index') }}" class="nav-link {% if 'docs' in request.endpoint %}active{% endif %}">Docs</a></li>
-        <li><a href="{{ url_for('examples.index') }}" class="nav-link {% if 'examples' in request.endpoint %}active{% endif %}">Examples</a></li>
+        <li><a href="{{ url_for('main.index') }}" class="nav-link {% if request.endpoint == 'main.index' %}active{% endif %}" data-section-target="home">🏠 Home</a></li>
+        <li><a href="{{ url_for('playground.index') }}" class="nav-link {% if request.endpoint == 'playground.index' %}active{% endif %}">🍳 Playground</a></li>
+        <li><a href="{{ url_for('docs.index') }}" class="nav-link {% if 'docs' in request.endpoint %}active{% endif %}" data-section-target="docs">📚 Docs</a></li>
+        <li><a href="{{ url_for('examples.index') }}" class="nav-link {% if 'examples' in request.endpoint %}active{% endif %}" data-section-target="examples">🧪 Examples</a></li>
       </ul>
-      
-      <button class="nav-menu-btn" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMobileMenu()">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="3" y1="12" x2="21" y2="12"></line>
-          <line x1="3" y1="6" x2="21" y2="6"></line>
-          <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-      </button>
+
+      <div class="nav-right-group">
+        <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color theme" aria-pressed="false" onclick="toggleTheme()">
+          <span class="theme-toggle-icon theme-toggle-sun" aria-hidden="true">☀</span>
+          <span class="theme-toggle-icon theme-toggle-moon" aria-hidden="true">☾</span>
+        </button>
+
+        <button class="nav-menu-btn" id="navMenuBtn" aria-label="Toggle menu" aria-expanded="false" onclick="toggleMobileMenu()">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line class="hamburger-line" x1="3" y1="6" x2="21" y2="6"></line>
+            <line class="hamburger-line" x1="3" y1="12" x2="21" y2="12"></line>
+            <line class="hamburger-line" x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
     </div>
   </nav>
-  
+
+  <!-- Mobile Nav Backdrop -->
+  <div class="nav-mobile-backdrop" id="mobileMenuBackdrop" onclick="toggleMobileMenu()"></div>
+
   <!-- Mobile Nav -->
   <div class="nav-mobile" id="mobileMenu" role="dialog" aria-label="Mobile navigation">
     <a href="{{ url_for('main.index') }}" class="nav-mobile-link">🏠 Home</a>
@@ -58,23 +84,23 @@
     <a href="{{ url_for('docs.index') }}" class="nav-mobile-link">📖 Docs</a>
     <a href="{{ url_for('examples.index') }}" class="nav-mobile-link">🍕 Examples</a>
   </div>
-  
+
   <!-- Main Content -->
   <main id="main-content" role="main">
     {% block content %}{% endblock %}
   </main>
-  
+
   <!-- Footer -->
   <footer class="footer" role="contentinfo">
     <div class="footer-inner">
       <div class="footer-brand">
         <a href="{{ url_for('main.index') }}" class="nav-logo" style="margin-bottom: var(--space-4); color: var(--color-text-primary);">
-          <span class="nav-logo-icon" aria-hidden="true">🥧</span>
+          <img class="nav-logo-icon" src="{{ url_for('static', filename='snackpie_logo.png') }}" alt="" aria-hidden="true">
           <span>{{ site_name }}</span>
         </a>
         <p>The easiest programming language for kid chefs. Write recipes, not code — a friendly bridge from Scratch to Python.</p>
       </div>
-      
+
       <div>
         <h3 class="footer-heading">Learn</h3>
         <ul class="footer-links">
@@ -83,7 +109,7 @@
           <li><a href="{{ url_for('docs.cookbook') }}">Cookbook</a></li>
         </ul>
       </div>
-      
+
       <div>
         <h3 class="footer-heading">Community</h3>
         <ul class="footer-links">
@@ -93,12 +119,12 @@
         </ul>
       </div>
     </div>
-    
+
     <div class="footer-bottom">
       <p>Made with 🥧 by {{ site_name }} Team &mdash; Happy Baking!</p>
     </div>
   </footer>
-  
+
   <!-- Scripts -->
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
   {% block scripts %}{% endblock %}

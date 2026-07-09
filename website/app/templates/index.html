@@ -4,15 +4,17 @@
 
 {% block head %}
 <style>
+  main { padding-top: 0; }
+
   /* ===== HERO ===== */
   .hero {
-    padding: var(--space-20) var(--space-5) var(--space-24);
+    padding: calc(var(--space-20) + var(--header-height) + var(--space-6)) var(--space-5) var(--space-24);
     background: var(--gradient-hero);
     position: relative;
     overflow: hidden;
   }
 
-  /* Floating glow orbs */
+  /* Floating ice glows */
   .hero::before {
     content: '';
     position: absolute;
@@ -20,7 +22,7 @@
     right: -10%;
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(255,77,109,0.12) 0%, transparent 65%);
+    background: radial-gradient(circle, rgba(66,116,217,0.18) 0%, transparent 65%);
     pointer-events: none;
     animation: float 8s ease-in-out infinite;
   }
@@ -31,7 +33,7 @@
     left: -10%;
     width: 500px;
     height: 500px;
-    background: radial-gradient(circle, rgba(0,217,192,0.08) 0%, transparent 65%);
+    background: radial-gradient(circle, rgba(249,232,162,0.14) 0%, transparent 65%);
     pointer-events: none;
     animation: float 11s ease-in-out infinite reverse;
   }
@@ -47,7 +49,7 @@
     z-index: 1;
   }
   @media (min-width: 768px) {
-    .hero { padding: var(--space-24) var(--space-8); }
+    .hero { padding: calc(var(--space-24) + var(--header-height) + var(--space-6)) var(--space-8) var(--space-24); }
     .hero-inner { grid-template-columns: 1fr 1fr; gap: var(--space-10); }
   }
 
@@ -60,19 +62,19 @@
     align-items: center;
     gap: var(--space-2);
     padding: var(--space-1) var(--space-4);
-    background: var(--color-cherry-dim);
-    border: 1px solid rgba(255,77,109,0.3);
+    background: var(--color-primary-light);
+    border: 1px solid rgba(66,116,217,0.30);
     border-radius: var(--radius-full);
     font-size: var(--text-sm);
     font-weight: var(--weight-bold);
-    color: var(--color-cherry-light);   /* Bright coral on dark — vivid */
+    color: var(--color-primary-hover);
     margin-bottom: var(--space-6);
     animation: fadeInUp 0.6s var(--ease-out-expo);
   }
   .hero-badge-dot {
     width: 8px;
     height: 8px;
-    background: var(--color-mint);
+    background: var(--color-accent);
     border-radius: 50%;
     animation: pulse 2s infinite;
   }
@@ -83,7 +85,7 @@
     font-size: var(--text-4xl);
     font-weight: var(--weight-bold);
     line-height: var(--leading-snug);
-    color: var(--color-text-primary);   /* #F0EEFF on #09090F — 16:1 contrast */
+    color: var(--color-text-primary);
     margin-bottom: var(--space-6);
     animation: fadeInUp 0.6s var(--ease-out-expo) 0.1s forwards;
     opacity: 0;
@@ -100,7 +102,7 @@
   /* Description */
   .hero-description {
     font-size: var(--text-lg);
-    color: var(--color-text-secondary);  /* #C8C2F0 — legible on dark */
+    color: var(--color-text-secondary);
     max-width: 45ch;
     margin: 0 auto var(--space-8);
     line-height: var(--leading-relaxed);
@@ -126,7 +128,7 @@
   }
   .hero-playground-card {
     background: var(--color-space);
-    border: 1px solid rgba(255,77,109,0.25);
+    border: 1px solid rgba(66,116,217,0.30);
     border-radius: var(--radius-xl);
     overflow: hidden;
     box-shadow: var(--shadow-xl), var(--shadow-glow);
@@ -134,7 +136,7 @@
   }
   .hero-playground-card:hover {
     transform: translateY(-6px);
-    box-shadow: var(--shadow-xl), 0 0 60px rgba(255,77,109,0.2);
+    box-shadow: var(--shadow-xl), 0 0 60px rgba(66,116,217,0.22);
   }
   .hero-playground-header {
     display: flex;
@@ -151,8 +153,8 @@
     border-radius: 50%;
   }
   .hero-playground-dot-red    { background: var(--color-paprika); }
-  .hero-playground-dot-yellow { background: var(--color-honey); }
-  .hero-playground-dot-green  { background: var(--color-mint); }
+  .hero-playground-dot-yellow { background: var(--color-secondary); }
+  .hero-playground-dot-green  { background: var(--color-accent); }
 
   .hero-playground-editor {
     padding: var(--space-5);
@@ -160,13 +162,13 @@
     font-size: var(--text-sm);
     line-height: var(--leading-code);
     min-height: 160px;
-    background: #06060E;
+    background: var(--color-white);
   }
   .hero-playground-editor textarea {
     width: 100%;
     height: 120px;
     background: transparent;
-    color: var(--color-star);           /* Near-white on near-black */
+    color: var(--color-text-primary);
     font-family: var(--font-mono);
     font-size: var(--text-sm);
     line-height: var(--leading-code);
@@ -176,8 +178,8 @@
   }
   .hero-playground-output {
     padding: var(--space-3) var(--space-5);
-    background: #06060E;
-    color: var(--color-mint);           /* Teal on black — vivid */
+    background: var(--color-white);
+    color: var(--color-accent-hover);
     font-family: var(--font-mono);
     font-size: var(--text-sm);
     min-height: 56px;
@@ -215,16 +217,16 @@
     font-size: 2.5rem;
     margin-bottom: var(--space-4);
     display: inline-block;
-    filter: drop-shadow(0 0 12px rgba(255,77,109,0.4));
+    filter: drop-shadow(0 0 12px rgba(66,116,217,0.35));
   }
   .feature-title {
     font-family: var(--font-display);
     font-size: var(--text-xl);
-    color: var(--color-text-primary);   /* White on dark card */
+    color: var(--color-text-primary);
     margin-bottom: var(--space-3);
   }
   .feature-desc {
-    color: var(--color-text-secondary); /* Lavender on dark — legible */
+    color: var(--color-text-secondary);
     font-size: var(--text-base);
     line-height: var(--leading-relaxed);
   }
@@ -255,22 +257,22 @@
     width: 60px;
     height: 60px;
     background: var(--gradient-primary);
-    color: #fff;
+    color: var(--color-white);
     font-family: var(--font-display);
     font-size: var(--text-2xl);
     font-weight: var(--weight-bold);
     border-radius: 50%;
     margin-bottom: var(--space-5);
-    box-shadow: 0 4px 24px var(--color-cherry-glow);
+    box-shadow: 0 4px 24px var(--color-primary-glow);
   }
   .quickstart-step-title {
     font-family: var(--font-display);
     font-size: var(--text-xl);
-    color: var(--color-text-primary);   /* White on nebula bg */
+    color: var(--color-text-primary);
     margin-bottom: var(--space-3);
   }
   .quickstart-step-desc {
-    color: var(--color-text-secondary); /* Lavender — visible on dark nebula */
+    color: var(--color-text-secondary);
     line-height: var(--leading-relaxed);
   }
 
@@ -291,14 +293,14 @@
     transform: translateX(-50%);
     width: 700px;
     height: 700px;
-    background: radial-gradient(circle, rgba(255,77,109,0.07) 0%, transparent 65%);
+    background: radial-gradient(circle, rgba(66,116,217,0.12) 0%, transparent 65%);
     pointer-events: none;
   }
   .cta-inner { max-width: 600px; margin: 0 auto; position: relative; z-index: 1; }
   .cta-title {
     font-family: var(--font-display);
     font-size: var(--text-3xl);
-    color: var(--color-text-primary);   /* White — always visible */
+    color: var(--color-text-primary);
     margin-bottom: var(--space-4);
   }
   .cta-desc {
@@ -327,7 +329,7 @@
 
 {% block content %}
 <!-- Hero -->
-<section class="hero">
+<section class="hero" id="home">
   <div class="hero-inner">
     <div class="hero-content">
       <div class="hero-badge">
@@ -388,7 +390,7 @@ say chef</textarea>
 </section>
 
 <!-- Features -->
-<section class="features">
+<section class="features" id="features">
   <div class="features-inner">
     <div class="features-header">
       <h2 class="section-title">The Kitchen Pantry 🍳</h2>
@@ -430,7 +432,7 @@ say chef</textarea>
 </section>
 
 <!-- Quick Start -->
-<section class="quickstart">
+<section class="quickstart" id="quickstart">
   <div class="quickstart-inner">
     <div class="features-header">
       <h2 class="section-title">Start Baking in 3 Steps 🥧</h2>
@@ -457,7 +459,7 @@ say chef</textarea>
 </section>
 
 <!-- CTA -->
-<section class="cta">
+<section class="cta" id="start">
   <div class="cta-inner">
     <h2 class="cta-title">Ready to Cook? 🍕</h2>
     <p class="cta-desc">Join thousands of kid chefs who are learning to code with SnackPie!</p>

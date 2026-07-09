@@ -4,32 +4,41 @@
 
 {% block content %}
 <section class="section">
-  <div class="container page-narrow">
-    <h1 class="page-title">🍕 Cookbook</h1>
-    <p class="page-subtitle" style="margin-bottom: var(--space-10); text-align: left;">Ready-to-use recipes and patterns for common tasks!</p>
+  <div class="container">
+    <div class="docs-shell">
+      <aside class="docs-toc" aria-label="Cookbook recipes">
+        <div class="docs-toc-title">Cookbook</div>
+        <a class="docs-toc-link" href="#counter">Score counter</a>
+        <a class="docs-toc-link" href="#grades">Grade checker</a>
+        <a class="docs-toc-link" href="#calculator">Calculator</a>
+        <a class="docs-toc-link" href="#odd-even">Odd or even</a>
+      </aside>
 
-    <!-- Recipe 1: Counter -->
-    <article class="doc-article" style="margin-bottom: var(--space-10);">
-      <h2 class="doc-section-title">📊 Score Counter</h2>
-      <p>Track a score or count that changes over time.</p>
-      <div class="code-block" style="margin: var(--space-4) 0;">
-        <div class="code-block-body">
-          <pre><code>score = 0
+      <div class="docs-content">
+        <header class="docs-hero">
+          <span class="docs-eyebrow">Recipe book</span>
+          <h1 class="page-title">Cookbook</h1>
+          <p class="page-subtitle" style="margin: 0; text-align: left;">Copy a recipe, run it, then swap ingredients. Each pattern stays small and readable.</p>
+        </header>
+
+        <article class="docs-section" id="counter">
+          <h2 class="doc-section-title">Score Counter</h2>
+          <p>Track a number that changes over time.</p>
+          <div class="code-block" style="margin: var(--space-4) 0;">
+            <div class="code-block-body"><pre><code>score = 0
 say score
 
 score = 10
-say score</code></pre>
-        </div>
-      </div>
-    </article>
+say score</code></pre></div>
+          </div>
+          <div class="docs-note"><strong>Try:</strong> Change <code>10</code> to your favorite score.</div>
+        </article>
 
-    <!-- Recipe 2: Decision Tree -->
-    <article class="doc-article" style="margin-bottom: var(--space-10);">
-      <h2 class="doc-section-title">🧭 Grade Checker</h2>
-      <p>Check a score and assign a grade.</p>
-      <div class="code-block" style="margin: var(--space-4) 0;">
-        <div class="code-block-body">
-          <pre><code>score = 95
+        <article class="docs-section" id="grades">
+          <h2 class="doc-section-title">Grade Checker</h2>
+          <p>Check score and print matching grade.</p>
+          <div class="code-block" style="margin: var(--space-4) 0;">
+            <div class="code-block-body"><pre><code>score = 95
 
 if score >= 90:
  say "A - Excellent!"
@@ -41,50 +50,45 @@ orif score >= 60:
  say "D - Passing"
 else:
  say "F - Keep trying!"
-end</code></pre>
-        </div>
-      </div>
-    </article>
+end</code></pre></div>
+          </div>
+        </article>
 
-    <!-- Recipe 3: Calculator -->
-    <article class="doc-article" style="margin-bottom: var(--space-10);">
-      <h2 class="doc-section-title">🧮 Simple Calculator</h2>
-      <p>Perform calculations with variables.</p>
-      <div class="code-block" style="margin: var(--space-4) 0;">
-        <div class="code-block-body">
-          <pre><code>a = 10
+        <article class="docs-section" id="calculator">
+          <h2 class="doc-section-title">Simple Calculator</h2>
+          <p>Store two numbers, then combine them.</p>
+          <div class="code-block" style="margin: var(--space-4) 0;">
+            <div class="code-block-body"><pre><code>a = 10
 b = 5
 
 say a + b
 say a - b
 say a * b
-say a / b</code></pre>
-        </div>
-      </div>
-    </article>
+say a / b</code></pre></div>
+          </div>
+        </article>
 
-    <!-- Recipe 4: Even/Odd -->
-    <article class="doc-article" style="margin-bottom: var(--space-10);">
-      <h2 class="doc-section-title">🔢 Even or Odd?</h2>
-      <p>Check if a number is even or odd.</p>
-      <div class="code-block" style="margin: var(--space-4) 0;">
-        <div class="code-block-body">
-          <pre><code>number = 7
+        <article class="docs-section" id="odd-even">
+          <h2 class="doc-section-title">Even or Odd</h2>
+          <p>Use math and a choice block to sort numbers.</p>
+          <div class="code-block" style="margin: var(--space-4) 0;">
+            <div class="code-block-body"><pre><code>number = 7
 half = number / 2
 
 if half == 3:
  say "Odd!"
 else:
  say "Even!"
-end</code></pre>
+end</code></pre></div>
+          </div>
+        </article>
+
+        <div class="cta-box">
+          <h3>Need more recipes?</h3>
+          <p>Browse examples and remix code in Playground.</p>
+          <a href="{{ url_for('examples.index') }}" class="btn btn-primary">Browse Examples</a>
         </div>
       </div>
-    </article>
-
-    <div class="cta-box">
-      <h3>Want more recipes? 🍳</h3>
-      <p>Check out the examples gallery!</p>
-      <a href="{{ url_for('examples.index') }}" class="btn btn-primary">🍕 Browse Examples</a>
     </div>
   </div>
 </section>

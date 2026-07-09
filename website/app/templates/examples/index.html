@@ -4,16 +4,14 @@
 
 {% block content %}
 <section class="section">
-  <div class="container" style="max-width: 1000px;">
-    <h1 style="font-family: var(--font-display); font-size: var(--text-3xl); margin-bottom: var(--space-2); text-align: center;">
-      🍕 Example Recipes
-    </h1>
-    <p style="color: var(--color-text-secondary); margin-bottom: var(--space-8); text-align: center;">
-      Explore examples and learn by doing!
-    </p>
+  <div class="container examples-container">
+    <div class="page-header">
+      <h1 class="page-title">🍕 Example Recipes</h1>
+      <p class="page-subtitle">Explore examples and learn by doing!</p>
+    </div>
     
     <!-- Filters -->
-    <div style="display: flex; justify-content: center; gap: var(--space-2); margin-bottom: var(--space-8); flex-wrap: wrap;">
+    <div class="examples-filters">
       <button class="btn btn-primary btn-sm filter-btn active" onclick="filterExamples('all')">All</button>
       <button class="btn btn-ghost btn-sm filter-btn" onclick="filterExamples('beginner')">Beginner</button>
       <button class="btn btn-ghost btn-sm filter-btn" onclick="filterExamples('intermediate')">Intermediate</button>
@@ -21,33 +19,27 @@
     </div>
     
     <!-- Examples Grid -->
-    <div style="display: grid; grid-template-columns: 1fr; gap: var(--space-6);" id="examplesGrid">
+    <div class="examples-grid" id="examplesGrid">
       {% for example in examples %}
-      <article class="card" data-difficulty="{{ example.difficulty }}" style="transition: all var(--transition-base);">
-        <div style="display: flex; flex-direction: column; gap: var(--space-4);">
-          <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: var(--space-4);">
-            <div>
-              <h3 style="font-family: var(--font-display); font-size: var(--text-xl); margin-bottom: var(--space-2);">
-                {{ example.title }}
-              </h3>
-              <p style="color: var(--color-text-secondary); margin: 0; font-size: var(--text-sm);">
-                {{ example.description }}
-              </p>
+      <article class="card example-card" data-difficulty="{{ example.difficulty }}">
+        <div class="example-card-inner">
+          <div class="example-card-top">
+            <div class="example-card-info">
+              <h3 class="example-card-title">{{ example.title }}</h3>
+              <p class="example-card-desc">{{ example.description }}</p>
             </div>
             <span class="tag {% if example.difficulty == 'beginner' %}tag-success{% elif example.difficulty == 'intermediate' %}tag-secondary{% else %}tag-error{% endif %}">
               {{ example.difficulty }}
             </span>
           </div>
           
-          <div style="display: flex; gap: var(--space-2); flex-wrap: wrap;">
+          <div class="example-card-tags">
             {% for tag in example.tags %}
-            <span style="padding: var(--space-1) var(--space-2); background: var(--color-surface); border: 1px solid var(--color-border-strong); border-radius: var(--radius-sm); font-size: var(--text-xs); color: var(--color-text-secondary);">
-              {{ tag }}
-            </span>
+            <span class="example-tag-inline">{{ tag }}</span>
             {% endfor %}
           </div>
           
-          <div style="display: flex; gap: var(--space-3); flex-wrap: wrap;">
+          <div class="example-card-actions">
             <a href="{{ url_for('examples.detail', slug=example.slug) }}" class="btn btn-primary btn-sm">
               👀 View Code
             </a>
@@ -63,10 +55,63 @@
 </section>
 
 <style>
+  .examples-container { max-width: 1000px; }
+
+  .examples-filters {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-2);
+    margin-bottom: var(--space-8);
+    flex-wrap: wrap;
+  }
+
+  .examples-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
   @media (min-width: 640px) {
-    #examplesGrid {
-      grid-template-columns: repeat(2, 1fr) !important;
-    }
+    .examples-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .example-card-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .example-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+  @media (max-width: 480px) {
+    .example-card-top { flex-direction: column; }
+  }
+
+  .example-card-title {
+    font-family: var(--font-display);
+    font-size: var(--text-xl);
+    margin-bottom: var(--space-2);
+  }
+
+  .example-card-desc {
+    color: var(--color-text-secondary);
+    margin: 0;
+    font-size: var(--text-sm);
+  }
+
+  .example-card-tags {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .example-card-actions {
+    display: flex;
+    gap: var(--space-3);
+    flex-wrap: wrap;
   }
 </style>
 {% endblock %}

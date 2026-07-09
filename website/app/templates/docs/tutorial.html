@@ -4,133 +4,113 @@
 
 {% block content %}
 <section class="section">
-  <div class="container page-narrow">
-    <h1 class="page-title">👩‍🍳 SnackPie Tutorial</h1>
-    <p class="page-subtitle" style="margin-bottom: var(--space-10); text-align: left;">Learn to code with SnackPie step by step!</p>
+  <div class="container">
+    <div class="docs-shell">
+      <aside class="docs-toc" aria-label="Tutorial sections">
+        <div class="docs-toc-title">Tutorial</div>
+        <a class="docs-toc-link" href="#first-recipe">First recipe</a>
+        <a class="docs-toc-link" href="#variables">Variables</a>
+        <a class="docs-toc-link" href="#math">Kitchen math</a>
+        <a class="docs-toc-link" href="#input">Input</a>
+        <a class="docs-toc-link" href="#choices">Choices</a>
+      </aside>
 
-    <!-- Lesson 1 -->
-    <article class="doc-article">
-      <h2 class="lesson-heading">
-        <span class="lesson-number">1</span>
-        Your First Recipe
-      </h2>
+      <div class="docs-content">
+        <header class="docs-hero">
+          <span class="docs-eyebrow">Guided path</span>
+          <h1 class="page-title">SnackPie Tutorial</h1>
+          <p class="page-subtitle" style="margin: 0; text-align: left;">Learn core SnackPie ideas in order. Read step, run recipe, then change one ingredient.</p>
+        </header>
 
-      <p>Let's start with the simplest thing: making Chef SnackPie talk! In SnackPie, we use <code>say</code> to print text.</p>
+        <article class="docs-section" id="first-recipe">
+          <h2 class="lesson-heading"><span class="lesson-number">1</span>Your First Recipe</h2>
+          <p>Use <code>say</code> to print text. Text can use double quotes or single quotes.</p>
 
-      <div class="code-block" style="margin: var(--space-4) 0;">
-        <div class="code-block-header">
-          <span>recipe.pie</span>
-          <span>Click "Bake" to run!</span>
-        </div>
-        <div class="code-block-body">
-          <pre><code>say "Hello, SnackPie!"
+          <div class="code-block" style="margin: var(--space-4) 0;">
+            <div class="code-block-header">
+              <span>recipe.pie</span>
+              <span>Run in Playground</span>
+            </div>
+            <div class="code-block-body">
+              <pre><code>say "Hello, SnackPie!"
 say 'Baking is fun!'
 say "Welcome to the kitchen!"</code></pre>
-        </div>
-      </div>
+            </div>
+          </div>
 
-      <p>This will output:</p>
-      <div class="card-code" style="margin: var(--space-4) 0;">
-        <code>>>>Hello, SnackPie!
+          <p>Output:</p>
+          <div class="card-code" style="margin: var(--space-4) 0;">
+            <code>>>>Hello, SnackPie!
 >>>Baking is fun!
 >>>Welcome to the kitchen!</code>
-      </div>
+          </div>
 
-      <p><strong>Your turn!</strong> Open the <a href="{{ url_for('playground.index') }}">Playground</a> and try saying your own message!</p>
-    </article>
+          <div class="docs-note"><strong>Chef hint:</strong> Change one message, then run again. Small changes teach fast.</div>
+        </article>
 
-    <!-- Lesson 2 -->
-    <article class="doc-article">
-      <h2 class="lesson-heading">
-        <span class="lesson-number">2</span>
-        Storing Ingredients (Variables)
-      </h2>
+        <article class="docs-section" id="variables">
+          <h2 class="lesson-heading"><span class="lesson-number">2</span>Storing Ingredients</h2>
+          <p>Variables store values. Think of them like labeled jars. Use <code>=</code> to fill jar.</p>
 
-      <p>When you want to save a value, put it in a labeled jar using <code>=</code>!</p>
-
-      <div class="code-block" style="margin: var(--space-4) 0;">
-        <div class="code-block-header">
-          <span>recipe.pie</span>
-        </div>
-        <div class="code-block-body">
-          <pre><code>chef_name = "Alex"
+          <div class="code-block" style="margin: var(--space-4) 0;">
+            <div class="code-block-header"><span>recipe.pie</span></div>
+            <div class="code-block-body">
+              <pre><code>chef_name = "Alex"
 say chef_name
 
 cookies = "12"
 say cookies</code></pre>
-        </div>
-      </div>
+            </div>
+          </div>
 
-      <div class="card-code" style="margin: var(--space-4) 0;">
-        <code>>>>Alex
->>>12</code>
-      </div>
-
-      <p><strong>Secret Ingredients!</strong> Start the jar name with <code>_</code> to make it a constant that can't be changed:</p>
-      <div class="code-block" style="margin: var(--space-4) 0;">
-        <div class="code-block-body">
-          <pre><code>_secret_sauce = "Honey &amp; Mustard"
+          <p>Constants start with <code>_</code>. They protect values from changes.</p>
+          <div class="code-block" style="margin: var(--space-4) 0;">
+            <div class="code-block-body">
+              <pre><code>_secret_sauce = "Honey &amp; Mustard"
 say _secret_sauce</code></pre>
-        </div>
-      </div>
-    </article>
+            </div>
+          </div>
+        </article>
 
-    <!-- Lesson 3 -->
-    <article class="doc-article">
-      <h2 class="lesson-heading">
-        <span class="lesson-number">3</span>
-        Kitchen Math
-      </h2>
+        <article class="docs-section" id="math">
+          <h2 class="lesson-heading"><span class="lesson-number">3</span>Kitchen Math</h2>
+          <p>SnackPie can calculate numbers with <code>+</code>, <code>-</code>, <code>*</code>, and <code>/</code>.</p>
 
-      <p>Chef SnackPie is super fast at counting cookies! Just type a math problem:</p>
-
-      <div class="code-block" style="margin: var(--space-4) 0;">
-        <div class="code-block-body">
-          <pre><code>3 * 5
+          <div class="code-block" style="margin: var(--space-4) 0;">
+            <div class="code-block-body">
+              <pre><code>3 * 5
 120 / 5
 10 + 20</code></pre>
-        </div>
-      </div>
+            </div>
+          </div>
 
-      <div class="card-code" style="margin: var(--space-4) 0;">
-        <code>>>>15
+          <div class="card-code" style="margin: var(--space-4) 0;">
+            <code>>>>15
 >>>24.0
 >>>30</code>
-      </div>
-    </article>
+          </div>
+        </article>
 
-    <!-- Lesson 4 -->
-    <article class="doc-article">
-      <h2 class="lesson-heading">
-        <span class="lesson-number">4</span>
-        Asking Questions
-      </h2>
+        <article class="docs-section" id="input">
+          <h2 class="lesson-heading"><span class="lesson-number">4</span>Asking Questions</h2>
+          <p>Use <code>ask</code> when recipe needs user input.</p>
 
-      <p>Need to get input from the user? Use <code>ask</code>!</p>
-
-      <div class="code-block" style="margin: var(--space-4) 0;">
-        <div class="code-block-body">
-          <pre><code>name = ask "What is your name? "
+          <div class="code-block" style="margin: var(--space-4) 0;">
+            <div class="code-block-body">
+              <pre><code>name = ask "What is your name? "
 say "Hello, " + name + "!"</code></pre>
-        </div>
-      </div>
-    </article>
+            </div>
+          </div>
+        </article>
 
-    <!-- Lesson 5 -->
-    <article class="doc-article">
-      <h2 class="lesson-heading">
-        <span class="lesson-number">5</span>
-        Making Choices (If/Else)
-      </h2>
+        <article class="docs-section" id="choices">
+          <h2 class="lesson-heading"><span class="lesson-number">5</span>Making Choices</h2>
+          <p>Use <code>if</code>, <code>orif</code>, <code>else</code>, and <code>end</code> to choose path.</p>
 
-      <p>To make decisions, use an <code>if</code> block, add extra tests with <code>orif</code>, write a backup with <code>else</code>, and finish with <code>end</code>!</p>
-
-      <div class="code-block" style="margin: var(--space-4) 0;">
-        <div class="code-block-header">
-          <span>recipe.pie</span>
-        </div>
-        <div class="code-block-body">
-          <pre><code>cookies = "12"
+          <div class="code-block" style="margin: var(--space-4) 0;">
+            <div class="code-block-header"><span>recipe.pie</span></div>
+            <div class="code-block-body">
+              <pre><code>cookies = "12"
 
 if cookies == "12":
  say "Perfect batch!"
@@ -139,16 +119,18 @@ orif cookies > "12":
 else:
  say "Need more cookies!"
 end</code></pre>
+            </div>
+          </div>
+
+          <div class="docs-note"><strong>Rule:</strong> Add one space before instructions inside each choice block.</div>
+        </article>
+
+        <div class="cta-box">
+          <h3>Ready to bake?</h3>
+          <p>Try lessons in Playground and change one line each time.</p>
+          <a href="{{ url_for('playground.index') }}" class="btn btn-primary">Open Playground</a>
         </div>
       </div>
-
-      <p><strong>Important:</strong> Add a single space before instructions inside the taste test, so Chef SnackPie knows they belong to that step!</p>
-    </article>
-
-    <div class="cta-box">
-      <h3>Ready to bake more? 🥧</h3>
-      <p>Try these recipes in the Playground!</p>
-      <a href="{{ url_for('playground.index') }}" class="btn btn-primary">🍳 Open Playground</a>
     </div>
   </div>
 </section>

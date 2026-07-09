@@ -4,25 +4,25 @@
 
 {% block content %}
 <section class="section">
-  <div class="container page-narrow" style="text-align: center;">
+  <div class="container page-narrow download-container">
     <div class="page-header">
       <h1 class="page-title">📦 Get SnackPie</h1>
       <p class="page-subtitle">Install SnackPie on your computer and start baking!</p>
     </div>
 
     <!-- Quick Start (Online) -->
-    <div class="card" style="margin-bottom: var(--space-6); text-align: left;">
+    <div class="card download-card">
       <h2 class="doc-section-title">🌐 Quick Start (No Installation)</h2>
       <p>Try SnackPie right now in your browser!</p>
       <a href="{{ url_for('playground.index') }}" class="btn btn-primary">🍳 Open Playground</a>
     </div>
 
     <!-- Install from GitHub -->
-    <div class="card" style="margin-bottom: var(--space-6); text-align: left;">
+    <div class="card download-card">
       <h2 class="doc-section-title">💻 Install from GitHub</h2>
       <p>Clone the repository and run locally:</p>
 
-      <div class="code-block" style="margin-bottom: var(--space-4);">
+      <div class="code-block download-code-block">
         <div class="code-block-header">
           <span>Terminal</span>
         </div>
@@ -39,15 +39,15 @@ python3 interpreter.py</code></pre>
         </div>
       </div>
 
-      <p style="font-size: var(--text-sm); color: var(--color-text-secondary); margin: 0;">
+      <p class="download-requirement">
         Requires Python 3.10 or higher.
       </p>
     </div>
 
     <!-- System Requirements -->
-    <div class="card" style="text-align: left;">
+    <div class="card download-card">
       <h2 class="doc-section-title">📋 System Requirements</h2>
-      <ul style="margin-left: var(--space-6);">
+      <ul class="download-requirements-list">
         <li>Python 3.10 or higher</li>
         <li>Any operating system (Windows, macOS, Linux)</li>
         <li>Terminal / Command line</li>
@@ -55,4 +55,28 @@ python3 interpreter.py</code></pre>
     </div>
   </div>
 </section>
+
+<style>
+  .download-container {
+    text-align: center;
+  }
+  .download-card {
+    margin-bottom: var(--space-6);
+    text-align: left;
+  }
+  .download-card:last-child {
+    margin-bottom: 0;
+  }
+  .download-code-block {
+    margin-bottom: var(--space-4);
+  }
+  .download-requirement {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+  .download-requirements-list {
+    margin-left: var(--space-6);
+  }
+</style>
 {% endblock %}

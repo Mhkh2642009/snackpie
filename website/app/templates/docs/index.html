@@ -4,51 +4,36 @@
 
 {% block content %}
 <section class="section">
-  <div class="container page-medium">
-    <div class="page-header">
-      <h1 class="page-title">📖 SnackPie Documentation</h1>
-      <p class="page-subtitle">Everything you need to become a master SnackPie chef!</p>
+  <div class="container">
+    <div class="docs-hero">
+      <span class="docs-eyebrow">SnackPie docs</span>
+      <h1 class="page-title">Documentation</h1>
+      <p class="page-subtitle" style="margin: 0; text-align: left;">Formal guides for learning SnackPie, with small kitchen hints so young coders stay oriented.</p>
     </div>
 
-    <div style="display: grid; grid-template-columns: 1fr; gap: var(--space-5); max-width: 600px; margin: 0 auto;">
-      <a href="{{ url_for('docs.tutorial') }}" class="doc-card-link">
-        <div class="card">
-          <div class="doc-card-icon">👩‍🍳</div>
-          <div>
-            <h3 class="doc-card-title">Tutorial</h3>
-            <p class="doc-card-desc">Step-by-step lessons from hello world to games!</p>
-          </div>
-        </div>
+    <div class="docs-grid">
+      <a href="{{ url_for('docs.tutorial') }}" class="docs-card">
+        <div class="docs-card-kicker">Start here</div>
+        <h3 class="doc-card-title">Tutorial</h3>
+        <p class="doc-card-desc">Guided lessons from first output to decisions. Best for new chefs.</p>
       </a>
 
-      <a href="{{ url_for('docs.reference') }}" class="doc-card-link">
-        <div class="card">
-          <div class="doc-card-icon">📋</div>
-          <div>
-            <h3 class="doc-card-title">Reference</h3>
-            <p class="doc-card-desc">Complete language reference and syntax guide.</p>
-          </div>
-        </div>
+      <a href="{{ url_for('docs.reference') }}" class="docs-card">
+        <div class="docs-card-kicker">Look up syntax</div>
+        <h3 class="doc-card-title">Language Reference</h3>
+        <p class="doc-card-desc">Commands, operators, variables, constants, and examples in one tidy shelf.</p>
       </a>
 
-      <a href="{{ url_for('docs.cookbook') }}" class="doc-card-link">
-        <div class="card">
-          <div class="doc-card-icon">🍕</div>
-          <div>
-            <h3 class="doc-card-title">Cookbook</h3>
-            <p class="doc-card-desc">Common patterns and ready-to-use recipes.</p>
-          </div>
-        </div>
+      <a href="{{ url_for('docs.cookbook') }}" class="docs-card">
+        <div class="docs-card-kicker">Copy patterns</div>
+        <h3 class="doc-card-title">Cookbook</h3>
+        <p class="doc-card-desc">Ready-to-run recipes for counters, calculators, and score checks.</p>
       </a>
 
-      <a href="{{ url_for('playground.index') }}" class="doc-card-link">
-        <div class="card">
-          <div class="doc-card-icon">👨‍🍳</div>
-          <div>
-            <h3 class="doc-card-title">Playground</h3>
-            <p class="doc-card-desc">Try code live in your browser!</p>
-          </div>
-        </div>
+      <a href="{{ url_for('playground.index') }}" class="docs-card">
+        <div class="docs-card-kicker">Try live</div>
+        <h3 class="doc-card-title">Playground</h3>
+        <p class="doc-card-desc">Run SnackPie code in browser and test each recipe as you read.</p>
       </a>
     </div>
   </div>

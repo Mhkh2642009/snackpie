@@ -4,104 +4,95 @@
 
 {% block content %}
 <section class="section">
-  <div class="container page-narrow">
-    <h1 class="page-title">📋 Language Reference</h1>
-    <p class="page-subtitle" style="margin-bottom: var(--space-10); text-align: left;">Complete guide to SnackPie syntax.</p>
+  <div class="container">
+    <div class="docs-shell">
+      <aside class="docs-toc" aria-label="Reference sections">
+        <div class="docs-toc-title">Reference</div>
+        <a class="docs-toc-link" href="#say">say</a>
+        <a class="docs-toc-link" href="#ask">ask</a>
+        <a class="docs-toc-link" href="#variables">Variables</a>
+        <a class="docs-toc-link" href="#constants">Constants</a>
+        <a class="docs-toc-link" href="#math">Math</a>
+        <a class="docs-toc-link" href="#conditionals">Conditionals</a>
+      </aside>
 
-    <!-- Say -->
-    <article class="doc-article" style="margin-bottom: var(--space-10);">
-      <h2 class="doc-section-title">say</h2>
-      <p>Print text or values to the screen.</p>
-      <div class="code-block" style="margin: var(--space-4) 0;">
-        <div class="code-block-body">
-          <pre><code>say "Hello!"
+      <div class="docs-content">
+        <header class="docs-hero">
+          <span class="docs-eyebrow">Syntax shelf</span>
+          <h1 class="page-title">Language Reference</h1>
+          <p class="page-subtitle" style="margin: 0; text-align: left;">Exact syntax and short examples. Use this page when you know what you need and want quick rules.</p>
+        </header>
+
+        <article class="docs-section" id="say">
+          <h2 class="doc-section-title">say</h2>
+          <p>Print text or values to output.</p>
+          <div class="code-block" style="margin: var(--space-4) 0;">
+            <div class="code-block-body"><pre><code>say "Hello!"
 say 'World'
-say variable_name</code></pre>
-        </div>
-      </div>
-    </article>
+say variable_name</code></pre></div>
+          </div>
+        </article>
 
-    <!-- Ask -->
-    <article class="doc-article" style="margin-bottom: var(--space-10);">
-      <h2 class="doc-section-title">ask</h2>
-      <p>Get input from the user.</p>
-      <div class="code-block" style="margin: var(--space-4) 0;">
-        <div class="code-block-body">
-          <pre><code>name = ask "What is your name? "</code></pre>
-        </div>
-      </div>
-    </article>
+        <article class="docs-section" id="ask">
+          <h2 class="doc-section-title">ask</h2>
+          <p>Read user input and store answer.</p>
+          <div class="code-block" style="margin: var(--space-4) 0;">
+            <div class="code-block-body"><pre><code>name = ask "What is your name? "</code></pre></div>
+          </div>
+        </article>
 
-    <!-- Variables -->
-    <article class="doc-article" style="margin-bottom: var(--space-10);">
-      <h2 class="doc-section-title">Variables</h2>
-      <p>Store values in labeled jars using <code>=</code>.</p>
-      <div class="code-block" style="margin: var(--space-4) 0;">
-        <div class="code-block-body">
-          <pre><code>name = "Alex"
+        <article class="docs-section" id="variables">
+          <h2 class="doc-section-title">Variables</h2>
+          <p>Store values in named jars with <code>=</code>.</p>
+          <div class="code-block" style="margin: var(--space-4) 0;">
+            <div class="code-block-body"><pre><code>name = "Alex"
 age = "12"
-score = 100</code></pre>
-        </div>
-      </div>
-    </article>
+score = 100</code></pre></div>
+          </div>
+        </article>
 
-    <!-- Constants -->
-    <article class="doc-article" style="margin-bottom: var(--space-10);">
-      <h2 class="doc-section-title">Constants</h2>
-      <p>Protect values with <code>_</code> prefix. Cannot be changed!</p>
-      <div class="code-block" style="margin: var(--space-4) 0;">
-        <div class="code-block-body">
-          <pre><code>_secret = "hidden"
-_secret = "new"  # ERROR!</code></pre>
-        </div>
-      </div>
-    </article>
+        <article class="docs-section" id="constants">
+          <h2 class="doc-section-title">Constants</h2>
+          <p>Prefix name with <code>_</code> to protect value from reassignment.</p>
+          <div class="code-block" style="margin: var(--space-4) 0;">
+            <div class="code-block-body"><pre><code>_secret = "hidden"
+_secret = "new"  # ERROR!</code></pre></div>
+          </div>
+        </article>
 
-    <!-- Math -->
-    <article class="doc-article" style="margin-bottom: var(--space-10);">
-      <h2 class="doc-section-title">Math Operations</h2>
-      <p>Perform calculations.</p>
-      <div class="code-block" style="margin: var(--space-4) 0;">
-        <div class="code-block-body">
-          <pre><code>3 + 5    # Addition
+        <article class="docs-section" id="math">
+          <h2 class="doc-section-title">Math Operations</h2>
+          <p>Use common arithmetic operators.</p>
+          <div class="code-block" style="margin: var(--space-4) 0;">
+            <div class="code-block-body"><pre><code>3 + 5    # Addition
 10 - 3   # Subtraction
 4 * 2    # Multiplication
-10 / 2   # Division</code></pre>
-        </div>
-      </div>
-    </article>
+10 / 2   # Division</code></pre></div>
+          </div>
+        </article>
 
-    <!-- Conditionals -->
-    <article class="doc-article" style="margin-bottom: var(--space-10);">
-      <h2 class="doc-section-title">Conditionals (if/orif/else)</h2>
-      <p>Make decisions in your code.</p>
-      <div class="code-block" style="margin: var(--space-4) 0;">
-        <div class="code-block-body">
-          <pre><code>if score > 90:
+        <article class="docs-section" id="conditionals">
+          <h2 class="doc-section-title">Conditionals</h2>
+          <p>Make decisions with <code>if</code>, optional <code>orif</code>, optional <code>else</code>, and closing <code>end</code>.</p>
+          <div class="code-block" style="margin: var(--space-4) 0;">
+            <div class="code-block-body"><pre><code>if score > 90:
  say "A+!"
 orif score > 80:
  say "Great job!"
 else:
  say "Keep trying!"
-end</code></pre>
+end</code></pre></div>
+          </div>
+
+          <div class="docs-note"><strong>Comparison operators:</strong> <code>==</code>, <code>!=</code>, <code>></code>, <code><</code>, <code>>=</code>, <code><=</code>.</div>
+        </article>
+
+        <div class="cta-box">
+          <h3>Try syntax live</h3>
+          <p>Open Playground and test commands from reference.</p>
+          <a href="{{ url_for('playground.index') }}" class="btn btn-primary">Open Playground</a>
         </div>
       </div>
-
-      <p style="margin-top: var(--space-4);"><strong>Comparison operators:</strong></p>
-      <ul>
-        <li><code>==</code> - Equal to</li>
-        <li><code>!=</code> - Not equal to</li>
-        <li><code>></code> - Greater than</li>
-        <li><code><</code> - Less than</li>
-        <li><code>>=</code> - Greater than or equal</li>
-        <li><code><=</code> - Less than or equal</li>
-      </ul>
-    </article>
-
-    <div class="cta-box">
-      <h3>Try it live! 🍳</h3>
-      <p>Open the playground to experiment with these commands.</p>
-      <a href="{{ url_for('playground.index') }}" class="btn btn-primary">👨‍🍳 Open Playground</a>
     </div>
   </div>
 </section>
