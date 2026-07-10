@@ -9,7 +9,7 @@ ans = ask "what is 1+3? "
 
 if ans == 4:
  say 'right answer'
-orif ans == '3':
+orif ans == 3:
  say 'wrong answer'
 else:
  say 'wrong'
