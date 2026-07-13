@@ -216,10 +216,7 @@ class IFstatement:
             right = self.parse_value(right)
 
             state = False
-<<<<<<< HEAD
 
-=======
->>>>>>> 014a2d7a197d992bd61cac318852e39129d082ef
             if op == ">":
                 state = left > right
 
@@ -246,10 +243,7 @@ class IFstatement:
             self.execute(else_body)
 
     def execute(self, body):
-<<<<<<< HEAD
 
-=======
->>>>>>> 014a2d7a197d992bd61cac318852e39129d082ef
         for command in body:
             prog(command, True)
 
