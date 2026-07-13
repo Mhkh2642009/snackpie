@@ -575,8 +575,37 @@
   @media (max-width: 767px) {
     .playground-page { padding-inline: var(--space-3); gap: var(--space-3); }
     .playground-header { align-items: flex-start; flex-direction: column; }
-    .playground-header-right { width: 100%; justify-content: stretch; }
-    .playground-header-right .btn { flex: 1; }
+    .playground-header-right {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+    }
+    .playground-header-right .btn-ghost .btn-label { display: none; }
+    .playground-header-right .btn-ghost {
+      flex: 0 0 auto;
+      padding-inline: var(--space-3);
+      min-width: 44px;
+      justify-content: center;
+    }
+    .playground-header-right .example-dropdown {
+      flex: 0 0 auto;
+      position: static;
+    }
+    .example-dropdown-menu {
+      position: absolute;
+      left: 0;
+      right: 0;
+      width: auto;
+      max-width: none;
+    }
+    .playground-header-right #runBtn {
+      order: 99;
+      flex: 1 0 100%;
+      min-height: 48px;
+      font-size: var(--text-base);
+      padding-inline: var(--space-4);
+    }
     .playground-tabs { padding: var(--space-1); }
     .playground-tab { min-height: 44px; border-radius: var(--radius-lg); border-bottom: 0; }
     .playground-tab.active { background: var(--color-secondary-light); }
@@ -606,7 +635,7 @@
     <div class="playground-header-right">
       <div class="example-dropdown">
         <button class="btn btn-ghost btn-sm" onclick="toggleExamples()" aria-haspopup="true" aria-expanded="false">
-          <span class="ui-icon" aria-hidden="true">📚</span> Examples ▾
+          <span class="ui-icon" aria-hidden="true">📚</span> <span class="btn-label">Examples ▾</span>
         </button>
         <div class="example-dropdown-menu" id="examplesDropdown" role="menu">
           <button class="example-dropdown-item" role="menuitem" onclick="loadExample('hello')">
@@ -648,11 +677,11 @@
       </div>
       
       <button class="btn btn-ghost btn-sm" onclick="clearEditor()" title="Clear editor">
-        <span class="ui-icon" aria-hidden="true">🧽</span> Clear
+        <span class="ui-icon" aria-hidden="true">🧽</span> <span class="btn-label">Clear</span>
       </button>
       
       <button class="btn btn-ghost btn-sm" onclick="saveCode()" title="Download .pie file">
-        <span class="ui-icon" aria-hidden="true">💾</span> Save
+        <span class="ui-icon" aria-hidden="true">💾</span> <span class="btn-label">Save</span>
       </button>
       
       <button class="btn btn-success" onclick="runCode()" id="runBtn">
